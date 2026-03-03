@@ -15,155 +15,154 @@
     <link rel="icon" href="logo.png" type="image/png">
     <link rel="shortcut icon" href="logo.png" type="image/png">
 
-    <style>
-        :root {
-            --amarelo: #FFEA00; 
-            --preto: #000000;
-            --branco: #ffffff;
-        }
+<style>
+    :root {
+        --amarelo: #FFEA00; 
+        --preto: #000000;
+        --branco: #ffffff;
+    }
 
-        /* BASE BRUTALISTA - FUNDO PRETO TOTAL */
-        body {
-            margin: 0;
-            padding: 20px;
-            background-color: var(--preto);
-            color: var(--branco); /* Texto padrão branco */
-            font-family: "Courier New", Courier, monospace;
-            display: flex;
-            justify-content: center;
-        }
+    
+    body {
+        margin: 0;
+        padding: 40px 20px;
+        background-color: var(--preto);
+        color: var(--branco);
+        font-family: "Courier New", Courier, monospace;
+        display: flex;
+        justify-content: center;
+    }
 
-        .main-container {
-            max-width: 850px;
-            width: 100%;
-            background-color: var(--preto);
-            border: 2px solid var(--amarelo);
-            padding: 40px;
-        }
+    .main-container {
+        max-width: 850px;
+        width: 100%;
+        background-color: transparent;
+        border: none;
+        padding: 0;
+    }
 
-        /* CASTELO ASCII NO TOPO */
-        .ascii-header {
-            color: var(--amarelo);
-            white-space: pre;
-            font-size: 10px;
-            line-height: 1.2;
-            text-align: center;
-            margin-bottom: 30px;
-            overflow-x: auto;
-        }
+    /* CASTELO ASCII */
+    .ascii-header {
+        color: var(--amarelo);
+        white-space: pre;
+        font-size: 10px;
+        line-height: 1.2;
+        text-align: center;
+        margin-bottom: 50px;
+        overflow-x: auto;
+    }
 
-        header {
-            text-align: center;
-            border-bottom: 2px solid var(--amarelo);
-            padding-bottom: 30px;
-            margin-bottom: 40px;
-        }
+    header {
+        text-align: center;
+        border: none;
+        padding: 0;
+        margin-bottom: 50px;
+    }
 
-        h1, h2 {
-            color: var(--amarelo);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin: 15px 0;
-            border-bottom: 1px solid var(--amarelo);
-            display: inline-block;
-        }
+    
+    h1, h2 {
+        color: var(--amarelo);
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin: 30px 0 15px 0;
+        border: none;
+        display: block;
+    }
 
-        .marquee-brutal {
-            color: var(--amarelo);
-            padding: 10px;
-            font-weight: bold;
-            border: 1px solid var(--amarelo);
-            margin-bottom: 30px;
-            text-transform: uppercase;
-        }
+    
+    .marquee-brutal {
+        color: var(--amarelo);
+        padding: 10px 0;
+        font-weight: bold;
+        border: none;
+        margin-bottom: 40px;
+        text-transform: uppercase;
+    }
 
-        .secao { 
-            margin-bottom: 60px; 
-            padding: 10px;
-        }
+    .secao { 
+        margin-bottom: 70px; 
+        padding: 0;
+    }
 
-        /* DOWNLOAD */
-        .download-box {
-            border: 2px solid var(--amarelo);
-            padding: 30px;
-            text-align: center;
-        }
-        
-        .btn-download {
-            background-color: var(--amarelo);
-            color: var(--preto);
-            font-size: 1.3rem;
-            font-weight: bold;
-            text-transform: uppercase;
-            padding: 15px 30px;
-            text-decoration: none;
-            display: inline-block;
-            margin-top: 15px;
-            transition: 0.3s;
-        }
+    
+    .download-box {
+        text-align: left; 
+        margin-top: 20px;
+    }
+    
+    .btn-download {
+        color: var(--amarelo);
+        background-color: transparent;
+        font-size: 1.4rem;
+        font-weight: bold;
+        text-transform: uppercase;
+        text-decoration: none;
+        display: inline-block;
+        transition: 0.3s;
+    }
 
-        .btn-download:hover {
-            background-color: var(--branco);
-            color: var(--preto);
-        }
+    .btn-download:hover {
+        color: var(--branco);
+        text-decoration: underline;
+    }
 
-        /* MÍDIA */
-        .video-container {
-            border: 2px solid var(--amarelo);
-            margin: 25px 0;
-            background: #000;
-            aspect-ratio: 16/9;
-        }
-        .video-container iframe { width: 100%; height: 100%; border: none; }
+    
+    .video-container {
+        border: none;
+        margin: 30px 0;
+        background: #000;
+        aspect-ratio: 16/9;
+    }
+    .video-container iframe { width: 100%; height: 100%; border: none; }
 
-        .galeria { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-        .card-foto { border: 1px solid var(--amarelo); padding: 5px; text-align: center; }
-        .card-foto img { width: 100%; display: block; filter: contrast(1.1); }
-        .card-foto span { color: var(--amarelo); font-size: 0.8rem; display: block; margin-top: 5px; }
+    .galeria { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+    .card-foto { border: none; padding: 0; text-align: left; }
+    .card-foto img { width: 100%; display: block; border: none; }
+    .card-foto span { color: var(--amarelo); font-size: 0.8rem; display: block; margin-top: 10px; }
 
-        /* PERFIL */
-        .perfil-container {
-            border: 1px solid var(--amarelo);
-            padding: 20px;
-        }
-        .perfil-fotos-grid {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
-            margin-top: 20px;
-        }
-        .foto-autor-foda {
-            width: 280px; 
-            border: 1px solid var(--amarelo);
-        }
+    .perfil-container {
+        border: none;
+        padding: 0;
+    }
+    
+    .perfil-fotos-grid {
+        display: flex;
+        justify-content: flex-start;
+        gap: 30px;
+        flex-wrap: wrap;
+        margin-top: 20px;
+    }
+    
+    .foto-autor-foda {
+        width: 320px; 
+        border: none;
+    }
 
-        /* DOAÇÃO */
-        .donate-container { text-align: center; padding: 30px; border: 1px dashed var(--amarelo); }
-        .btn-donate {
-            color: var(--amarelo);
-            border: 1px solid var(--amarelo);
-            padding: 10px 30px;
-            text-decoration: none;
-            text-transform: uppercase;
-            transition: 0.3s;
-        }
-        .btn-donate:hover {
-            background: var(--amarelo);
-            color: var(--preto);
-        }
+   
+    .donate-container { text-align: left; padding: 0; border: none; margin-top: 20px; }
+    .btn-donate {
+        color: var(--amarelo);
+        text-decoration: underline;
+        text-transform: uppercase;
+        font-weight: bold;
+        transition: 0.3s;
+    }
+    .btn-donate:hover {
+        color: var(--branco);
+    }
 
-        footer { 
-            text-align: center; 
-            color: var(--amarelo);
-            font-size: 0.7rem;
-            margin-top: 40px; 
-            border-top: 1px solid var(--amarelo);
-            padding-top: 20px;
-        }
+    footer { 
+        text-align: left; 
+        color: #444;
+        font-size: 0.8rem;
+        margin-top: 100px; 
+        border: none;
+        padding: 0;
+    }
 
-        strong { color: var(--amarelo); }
-    </style>
+    strong { color: var(--amarelo); }
+</style>    
+   
 </head>
 <body>
 
