@@ -8,30 +8,26 @@
     <meta name="keywords" content="pwrat,saturno,morte,solidão,melhor programador, misantropia, insonia,saturvos, sistema operacional, 32-bit OS, João V. Gabriel, kernel development, assembly, C">
     <meta name="author" content="PWRAT">
 
-     <meta property="og:title" content="SaturvOs">
-     <meta property="og:description" content="O Castelo Virtual de um Príncipe de Baixo Nível.">
-     <meta property="og:url" content="https://pwrate-dev.github.io/">
-    
+    <meta property="og:title" content="SaturvOs">
+    <meta property="og:description" content="O Castelo Virtual de um Príncipe de Baixo Nível.">
+    <meta property="og:url" content="https://pwrate-dev.github.io/">
     
     <link rel="icon" href="logo.png" type="image/png">
     <link rel="shortcut icon" href="logo.png" type="image/png">
 
-    <meta name="description" content="SaturvOs - Sistema Operacional 32-bits por João V. Gabriel (PWRAT)">
-    
     <style>
         :root {
             --amarelo: #FFEA00; 
             --preto: #000000;
             --branco: #ffffff;
-            --cinza-fundo: #f0f0f0;
         }
 
-        /* RESET & BASE BRUTALISTA */
+        /* BASE BRUTALISTA - FUNDO PRETO TOTAL */
         body {
             margin: 0;
             padding: 20px;
-            background-color: var(--amarelo); /* Fundo vibrante */
-            color: var(--preto);
+            background-color: var(--preto);
+            color: var(--branco); /* Texto padrão branco */
             font-family: "Courier New", Courier, monospace;
             display: flex;
             justify-content: center;
@@ -40,107 +36,80 @@
         .main-container {
             max-width: 850px;
             width: 100%;
-            background-color: var(--branco);
-            border: 6px solid var(--preto);
-            box-shadow: 20px 20px 0px var(--preto); /* Sombra sólida clássica */
+            background-color: var(--preto);
+            border: 2px solid var(--amarelo);
             padding: 40px;
-            position: relative;
         }
 
-        /* HEADER */
+        /* CASTELO ASCII NO TOPO */
+        .ascii-header {
+            color: var(--amarelo);
+            white-space: pre;
+            font-size: 10px;
+            line-height: 1.2;
+            text-align: center;
+            margin-bottom: 30px;
+            overflow-x: auto;
+        }
+
         header {
             text-align: center;
-            border-bottom: 6px solid var(--preto);
+            border-bottom: 2px solid var(--amarelo);
             padding-bottom: 30px;
             margin-bottom: 40px;
         }
 
-        .logo {
-            width: 140px;
-            height: 140px;
-            border: 5px solid var(--preto);
-            object-fit: cover;
-            
-    
-        }
-
         h1, h2 {
-            background-color: var(--preto);
             color: var(--amarelo);
-            display: inline-block;
-            padding: 5px 20px;
             text-transform: uppercase;
             letter-spacing: 2px;
             margin: 15px 0;
+            border-bottom: 1px solid var(--amarelo);
+            display: inline-block;
         }
 
-        /* MARQUEE */
         .marquee-brutal {
-            background: var(--preto);
             color: var(--amarelo);
             padding: 10px;
             font-weight: bold;
-            border: 3px solid var(--preto);
+            border: 1px solid var(--amarelo);
             margin-bottom: 30px;
             text-transform: uppercase;
         }
 
         .secao { 
             margin-bottom: 60px; 
-            border: 3px solid var(--preto);
-            padding: 20px;
-            background: #fafafa;
+            padding: 10px;
         }
 
         /* DOWNLOAD */
         .download-box {
-            background: var(--preto);
-            color: var(--branco);
+            border: 2px solid var(--amarelo);
             padding: 30px;
             text-align: center;
-            border: 4px solid var(--preto);
         }
         
         .btn-download {
             background-color: var(--amarelo);
             color: var(--preto);
             font-size: 1.3rem;
-            font-weight: 900;
+            font-weight: bold;
             text-transform: uppercase;
-            padding: 20px 40px;
+            padding: 15px 30px;
             text-decoration: none;
             display: inline-block;
-            border: 4px solid var(--preto);
-            box-shadow: 8px 8px 0px var(--branco);
-            transition: 0.1s;
+            margin-top: 15px;
+            transition: 0.3s;
         }
 
         .btn-download:hover {
-            transform: translate(-4px, -4px);
-            box-shadow: 12px 12px 0px var(--branco);
-        }
-
-        /* BLOG POSTS */
-        .blog-post { 
-            background: var(--branco); 
-            border: 3px solid var(--preto);
-            padding: 20px; 
-            margin-bottom: 20px; 
-            box-shadow: 8px 8px 0px var(--preto);
-        }
-        
-        .blog-data { 
-            background: var(--preto);
-            color: var(--amarelo);
-            padding: 2px 8px;
-            font-weight: bold;
-            display: inline-block;
-            margin-bottom: 10px;
+            background-color: var(--branco);
+            color: var(--preto);
         }
 
         /* MÍDIA */
         .video-container {
-            border: 5px solid var(--preto);
+            border: 2px solid var(--amarelo);
             margin: 25px 0;
             background: #000;
             aspect-ratio: 16/9;
@@ -148,16 +117,14 @@
         .video-container iframe { width: 100%; height: 100%; border: none; }
 
         .galeria { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-        .card-foto { border: 4px solid var(--preto); padding: 5px; background: var(--branco); }
-        .card-foto img { width: 100%; border-bottom: 4px solid var(--preto); display: block; } /* Sem grayscale */
-        .card-foto span { font-weight: bold; display: block; padding: 10px; text-align: center; }
+        .card-foto { border: 1px solid var(--amarelo); padding: 5px; text-align: center; }
+        .card-foto img { width: 100%; display: block; filter: contrast(1.1); }
+        .card-foto span { color: var(--amarelo); font-size: 0.8rem; display: block; margin-top: 5px; }
 
         /* PERFIL */
         .perfil-container {
-            background: var(--preto);
-            color: var(--branco);
-            padding: 30px;
-            border: 4px solid var(--preto);
+            border: 1px solid var(--amarelo);
+            padding: 20px;
         }
         .perfil-fotos-grid {
             display: flex;
@@ -167,109 +134,134 @@
             margin-top: 20px;
         }
         .foto-autor-foda {
-            width: 250px; 
-            border: 4px solid var(--amarelo);
-        
+            width: 280px; 
+            border: 1px solid var(--amarelo);
         }
 
         /* DOAÇÃO */
-        .donate-container { text-align: center; padding: 40px; background: var(--amarelo); border: 4px solid var(--preto); }
+        .donate-container { text-align: center; padding: 30px; border: 1px dashed var(--amarelo); }
         .btn-donate {
-            background: var(--preto);
             color: var(--amarelo);
-            padding: 15px 40px;
+            border: 1px solid var(--amarelo);
+            padding: 10px 30px;
             text-decoration: none;
-            font-weight: bold;
-            border: 4px solid var(--preto);
-            display: inline-block;
-            transition: 0.2s;
+            text-transform: uppercase;
+            transition: 0.3s;
         }
         .btn-donate:hover {
-            background: var(--branco);
+            background: var(--amarelo);
             color: var(--preto);
         }
 
         footer { 
             text-align: center; 
-            font-weight: bold; 
-            border-top: 6px solid var(--preto); 
-            padding: 20px; 
+            color: var(--amarelo);
+            font-size: 0.7rem;
             margin-top: 40px; 
-            text-transform: uppercase;
+            border-top: 1px solid var(--amarelo);
+            padding-top: 20px;
         }
+
+        strong { color: var(--amarelo); }
     </style>
 </head>
 <body>
 
     <div class="main-container">
+        <div class="ascii-header">                                                                                                                     
+                                                                                                                       
+                                                                                                                       
+                                                                                                                       
+                                                                                                                       
+                                                           +*#########*=                                               
+                                                           +####*+#####+                                               
+                                                           +###+:-=####+                                               
+                                                           +###########+                                               
+                                                           =+++++++++++=                                               
+                                                           ==                                                          
+                                                          .-:                                                          
+                                                         ......                                                        
+                                                       ..:-==:...                                                      
+                                                     ...-=++++=:...                                                    
+                                                   ...-==========:...                                                  
+                                                  ..:=+++++++++++==...                                                 
+                                               ...:-================-:..                                               
+                                              ...+=====================...                                             
+                                            ...-=++++++++++++++++++++++=-...                                           
+                                          ...-============================:...                                         
+                                          ..:----.::---=========--::.:--:--:....                                       
+                                          ......---=+*##%%%%%%%##+==--:..........                                      
+                        ....                ....--==+*##%%%%%%%##+==---..........           ...                        
+                       ......                 ..--==+*##%%%%%%%##+==---.....               ......                      
+                     ...-==-...               ..--==+*###########+==---.....            ...:-==-...                    
+                   ...-=++++=-...             ..--==+*#**-.:===+*+==---.....           ...-=+==+=:...                  
+                 ...-==========-...           ..--==+*#*-.:=====*+==---.....         ...-==========-...                
+               ...:=++++++++++++=:...         ..--==+*#*-.:=====*+==---.....       ...-==============....              
+             ...:-=================-...       ..--==+*#*-.:=====*+==---.....     ...-=+++++++++++++++=-:..             
+           ....======================:...     ..--==+*#*-.:=====*+==---.....   ...:=====================-....          
+          ...-=++++++++++++++++++++++=-:..    ..--==+*#*++++++++*+==---.....  ..:-==++++++++++++++++++++==-...         
+        ...:=---:.:::::::-:::::::...---=:.... ..--==+*##%%%%%%%##+==---..... ............:::::--:::::..........        
+        .........:==+**#####**+==--:............--==+*##%%%%%%%##+==---.....  .......:---==+*#%%#*+==--:.........      
+            .....:==+**#####**+==---.............-==+*#.........:+==---.......  .....:---==+*#%%#*+==--:.........      
+                .:==+**#####**+==---.......=--=-.-==+*#.-==-===::+==----::::.........:---==+****#*+==--:...            
+                .:==+*+====+**+==---...:--------::..:::.-------:.::..::.::..::------.:---=++++++*++==--:...            
+                .:==*=...::::++==---...:--------------------------------------------.:---=+-...:-++==--:...            
+                .:==*=..:---:=+==---...---===--==--===-====-==--==-==--==--===--=--=.:---=+-..---++==--:...            
+                .:==*=.:----:=+==---...-==-===--==--===--===-==--==--==-==--===--===.:---=+-..---=+==--:...            
+                .:==*=..:::::=+==---...:---..:::::.:---..::::::::.--:.::::..--------.:---=+-::---++==--:...            
+                .:==+*********+==---...:---.=+++++:..:-.-+++++++=.--:-++++=-..------.:---=++*#%%#*+==--:...            
+                .:==+**#####**+==---...-==-.=+++++++=:.:=+++++++=:...-+++++-..==--==.:---==+*#%%#*+==--:...            
+                .:==+**#####**+==---...:-=-.=++++++++++++++++++++++++++++++-..--===-.:---==+*#%%#*+==--:...            
+                .:==+**#####**+==---...:---.--=++++++++++++--=+++++++++++==-..------.:---==+*#%%#*+==--:...            
+                .:==+**#####**+==---...:----..:+++++++++-:.:*..::++++++++:...-------.:---==+*#%%#*+==--:...            
+                .:==+**#####**+==---...:-===:.:+++++++++:+%%%%%=:++++++++:...-====--.:---==+*#%%#*+==--:...            
+                .:==+**#####**+==---...-===-..:+++++++++::-###=.:++++++++:..:-==--==.:---==+*#%%#*+==--:...            
+      .......   ..---==+*+====--=--:...:----..:++++++++++=-----=+++++++++:...-::::::.:--::--==*%#+--::-:...........    
+     ..:---:... .:--=-:-+.----:.--:.---::---..:++=++=++==++==++==+++==+++:...-.-----.:-:.-----:%#-:--.::...-----....   
+     ..---=-::...:==--::::---=-.::..==-:::::..:++++++++++++++++++++++++++-...:.---==..:::=----:##-:=-.:...:==---.....  
+     ..=====================================:.:+++++++++++++++++++++++++++:.:========:..:====-....:============-.....  
+     ..===--==--==----==--==--==---==--==----.:+++++++++-------=++++++++++:.:=--==--==-==--==-===-==--==-==--==-.....  
+     ..---==--=----=----=---==---=---=----=-.-+++=++=++..-=-==:.:+++==+++=:..-=----=--==--=---=--==--=---=--=---.....  
+     ..-=----=--==---==---==--==--==--=====-.=++++++=--.-==-===:.--=++++++:.:=---==--==--=--==--==--=--==--==-=-.....  
+     ..=====================================:-++++++=:=====-=====-.=++++++:.:==================================-.....  
+     ..--===---==-==---===--==--==-======---:-++++++=:=====-=====-.=++++++:..--==---==-======-===-===-==-==--==-.....  
+     ..-=----=----=--=----=----=---=--=---=-.-====++-:=====-=====-.=++====:..-=----=---=--=---=--=---=---=--=---.....  
+     ...--==--=-----==-==---==---==--=--==--.-++++++=:=====-=====-.=++++++:.:=---==--==--=--==--==--=--==--==-=-.....  
+      ..====================================:=++++++=:=====-=====-.=++++++:.:==================================-.....  
+      ..-==--:::::::-==---==--==--==---==-==:-++++++=:=====-=====-.=+++++:.:--==--==--==-:::::::::--===-==--==--.....  
+      .......................................=++====-:=====-=====-.===++=:...........................................  
+      ...............................................................................................................  
+           ..........................................................................................................
+            
+        </div>
+
         <div class="marquee-brutal">
-            <marquee scrollamount="10"> [: SaturvOs v0.1 ALPHA :: DESENVOLVIDO EM ASSEMBLY E C :: O CASTELO VIRTUAL DO PWRAT :: SISTEMA ITERLIGADO:: SEM INTERNET :: SEM ABIN :: SEM POLÍCIA FEDERAL :: MORTE A NOVA SOCIEDADE :: MORTE AO JOGADOR CARO :]  </marquee>
+            <marquee scrollamount="10"> [: SaturvOs v0.1 ALPHA :: DESENVOLVIDO EM ASSEMBLY E C :: O CASTELO VIRTUAL DO PWRAT :: SISTEMA INTERLIGADO :: SEM INTERNET :: SEM ABIN :: SEM POLÍCIA FEDERAL :: MORTE A NOVA SOCIEDADE :: MORTE AO JOGADOR CARO :] </marquee>
         </div>
 
         <header>
-            <img src="logo.png" alt="SaturvOs Logo" class="logo">
-            <br>
             <h1>SaturvOS</h1>
-            <p style="font-weight: bold; margin-top: 10px;">"Um Sistema Feito da Carne de uma pessoa solitária."</p>
+            <p>"Um Sistema Feito da Carne de uma pessoa solitária."</p>
         </header>
 
         <section class="secao">
-            <h2>DOWNLOAD</h2>
+            <h2>[01] DOWNLOAD</h2>
             <div class="download-box">
                 <p>Versão Alpha 0.1 "Titan". Rode no QEMU, Bochs ou VirtualBox.</p>
-                <a href="https://github.com/pwrate-dev/pwrate-dev.github.io/releases/tag/v0.1">BAIXAR_SATURVOS.IMG</a>
-                <p style="font-size: 0.8rem; margin-top: 15px;">FORMATO: DISK IMAGE | BOOTABLE: YES</p>
+                <a href="https://github.com/pwrate-dev/pwrate-dev.github.io/releases/tag/v0.1" class="btn-download">BAIXAR_SATURVOS.IMG</a>
+                <p style="font-size: 0.8rem; margin-top: 15px; color: var(--amarelo);">FORMATO: .IMG | BOOTABLE: YES</p>
             </div>
         </section>
 
         <section class="secao">
-            <h2>DEVLOG</h2> 
-            
-             <article class="blog-post">
-                  <span class="blog-data">02/03/2026</span>
-                   <p> <strong>PWRAT:</strong>7. Correções Simples Geram problemas complexos. Nunca tive tanto Trabalho pra diminuir a velocidade de um loop.(○_○)!</article>
-             
-            
-             <article class="blog-post">
-                  <span class="blog-data">01/03/2026</span>
-                   <p> <strong>PWRAT:</strong>6. Sistema Interligado com mais de 250 cores. Você não nescesita de nada mais que isso apenas use o <strong>SaturvOS</strong> </p> 
-             </article>
-            
-             <article class="blog-post">
-                 <span class="blog-data">01/03/2026</span>
-                 <p> <strong>PWRAT:</strong>5. Estou Socializando Com Meu Chat, isso é Otimo. As vezes Eu Queria ver eles da mesma forma que eles estão me vendo.</p>
-             </article>
-            
-             <article class="blog-post">
-                <span class="blog-data">28/02/2026</span>
-                <p><strong>PWRAT:</strong>4. Faça sua parte.Tenha um propósito. Estou a 5 Dias sem tomar remédio e ja sinto o verdadeiro efeito da vida, ótimo momento para refletir sobre minhas atitudes.</p>
-            </article>
-            
-            <article class="blog-post">
-                <span class="blog-data">27/02/2026</span>
-                <p><strong>PWRAT:</strong>3.Isolamento interno. Buscando me interligar ao kernel e transformar sabedoria em desenvolvimento humano. Focado no sistema. O SaturvOs espera seu príncipe, e eu o meu trono.</p>
-            </article>
-
-           <article class="blog-post">
-                <span class="blog-data">09/02/2026</span>
-                <p><strong>PWRAT:</strong>2. Vejam, seus ratos lembrem-se de quem é o seu Príncipe. Ajoelhem-se perante a minha glória e os meus feitos. O Ring-0 não aceita impuros.</p>
-            </article>
-            
-            <article class="blog-post">
-                <span class="blog-data">07/02/2026</span>
-                <p><strong>PWRAT:</strong>1. Incidente de segurança resolvido. Driver VGA sendo reescrito para eliminar o flicker de memória de vídeo.</p>
-            </article>
-        </section>
-
-        <section class="secao">
-            <h2>ORIGEM</h2>
-            <div style="border-left: 10px solid var(--preto); padding-left: 20px; margin-bottom: 30px;">
-                <p style="font-style: italic; font-weight: bold; font-size: 1.1rem;">
-                    "4 anos de isolamento social. Sem contatos profundos. Sabendo que os dias se esgotam em meio ao caos da minha mente, encontrei a verdadeira sabedoria nestas linhas de código."
+            <h2>[02] ORIGEM</h2>
+            <div style="border-left: 4px solid var(--amarelo); padding-left: 20px; margin-bottom: 30px;">
+                <p style="font-weight: bold; color: var(--amarelo);">
+                    "4 anos de isolamento social. Sem contatos profundos. Encontrei a verdadeira sabedoria nestas linhas de código."
                 </p>
                 <p>
-                    Tornei-me um <strong>Príncipe de Baixo Nível</strong>. Alguém que não se importa com julgamentos alheios. No Ring-0, eu sou o soberano. 
-                    Enquanto o resto do mundo se perde no superficial, meu único incentivo de viver é o reinado de <strong>Saturv</strong> e a beleza da sua arquitetura pura.
+                    Tornei-me um <strong>Príncipe de Baixo Nível</strong>. No Ring-0, eu sou o soberano. 
+                    Enquanto o mundo se perde no superficial, meu único incentivo de viver é o reinado de <strong>Saturv</strong> e a beleza da sua arquitetura pura.
                 </p>
             </div>
 
@@ -278,13 +270,13 @@
             </div>
             
             <div class="galeria">
-                <div class="card-foto"><img src="saturvos1.png"><span>MEMÓRIA_16BIT_2025</span></div>
-                <div class="card-foto"><img src="saturvos2.png"><span>ASCENSÃO_32BIT_2026</span></div>
+                <div class="card-foto"><img src="saturvos1.png"><span>MEMÓRIA_16BIT</span></div>
+                <div class="card-foto"><img src="saturvos2.png"><span>ASCENSÃO_32BIT</span></div>
             </div>
         </section>
 
         <section class="secao">
-            <h2>AUTOR</h2>
+            <h2>[03] AUTOR</h2>
             <div class="perfil-container">
                 <p><strong>João V. Gabriel (PWRAT)</strong>. Arquiteto do SaturvOs.</p>
                 <div class="perfil-fotos-grid">
@@ -295,8 +287,8 @@
         </section>
 
         <section class="secao">
-            <h2>COMUNITARIO</h2>
-            <div style="background: white; padding: 10px; border: 4px solid black; box-shadow: 10px 10px 0px var(--preto);">
+            <h2>[04] COMUNIDADE</h2>
+            <div style="background: #111; padding: 10px; border: 1px solid var(--amarelo);">
                 <script src="https://giscus.app/client.js"
                         data-repo="pwrate-dev/pwrate-dev.github.io"
                         data-repo-id="R_kgDORHG_Nw"
@@ -307,7 +299,7 @@
                         data-reactions-enabled="1"
                         data-emit-metadata="0"
                         data-input-position="top"
-                        data-theme="light"
+                        data-theme="dark"
                         data-lang="pt"
                         crossorigin="anonymous"
                         async>
@@ -316,7 +308,7 @@
         </section>
 
         <section class="secao">
-            <h2>APOIO</h2>
+            <h2>[05] APOIO</h2>
             <div class="donate-container">
                 <a href="https://livepix.gg/pwrate" target="_blank" class="btn-donate">APOIAR_VIA_LIVEPIX</a>
             </div>
