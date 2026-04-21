@@ -155,13 +155,158 @@
         text-align: left; 
         color: #444;
         font-size: 0.8rem;
-        margin-top: 100px; 
+ <style>
+    :root {
+        /* Cores Invertidas */
+        --amarelo: #FFEA00; 
+        --preto: #000000;
+        --branco: #ffffff;
+    }
+
+    body {
+        margin: 0;
+        padding: 40px 20px;
+        background-color: var(--amarelo); /* Fundo agora é amarelo */
+        color: var(--preto); /* Letras agora são pretas */
+        font-family: "Courier New", Courier, monospace;
+        display: flex;
+        justify-content: center;
+    }
+
+    .main-container {
+        max-width: 850px;
+        width: 100%;
+        background-color: transparent;
         border: none;
         padding: 0;
     }
 
-    strong { color: var(--amarelo); }
-</style>    
+    /* CASTELO ASCII */
+    .ascii-header {
+        color: var(--preto); /* ASCII em preto para aparecer no fundo amarelo */
+        white-space: pre;
+        font-size: 10px;
+        line-height: 1.2;
+        text-align: center;
+        margin-bottom: 50px;
+        overflow-x: auto;
+    }
+
+    header {
+        text-align: center;
+        border: none;
+        padding: 0;
+        margin-bottom: 50px;
+    }
+    
+    h1, h2 {
+        color: var(--preto); /* Títulos em preto */
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin: 30px 0 15px 0;
+        border-bottom: 2px solid var(--preto); /* Linha sutil para separar */
+        display: inline-block;
+    }
+    
+    .marquee-brutal {
+        color: var(--preto);
+        padding: 10px 0;
+        font-weight: bold;
+        border-top: 2px solid var(--preto);
+        border-bottom: 2px solid var(--preto);
+        margin-bottom: 40px;
+        text-transform: uppercase;
+    }
+
+    .secao { 
+        margin-bottom: 70px; 
+        padding: 0;
+    }
+
+    .download-box {
+        text-align: left; 
+        margin-top: 20px;
+        border: 2px solid var(--preto); /* Box visível no fundo amarelo */
+        padding: 20px;
+    }
+    
+    .btn-download {
+        color: var(--preto);
+        background-color: transparent;
+        font-size: 1.4rem;
+        font-weight: bold;
+        text-transform: uppercase;
+        text-decoration: underline;
+        display: inline-block;
+        transition: 0.3s;
+    }
+
+    .btn-download:hover {
+        background-color: var(--preto);
+        color: var(--amarelo);
+    }
+
+    .video-container {
+        border: 5px solid var(--preto);
+        margin: 30px 0;
+        background: #000;
+        aspect-ratio: 16/9;
+    }
+
+    .galeria { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+    .card-foto { border: 2px solid var(--preto); padding: 5px; text-align: left; background: var(--amarelo); }
+    .card-foto img { width: 100%; display: block; filter: grayscale(100%); transition: 0.3s; }
+    .card-foto img:hover { filter: none; }
+    .card-foto span { color: var(--preto); font-weight: bold; font-size: 0.8rem; display: block; margin-top: 10px; }
+
+    .perfil-container {
+        border: none;
+        padding: 0;
+    }
+    
+    .perfil-fotos-grid {
+        display: flex;
+        justify-content: flex-start;
+        gap: 30px;
+        flex-wrap: wrap;
+        margin-top: 20px;
+    }
+    
+    .foto-autor-foda {
+        width: 320px; 
+        border: 3px solid var(--preto);
+        filter: grayscale(100%);
+    }
+
+    .donate-container { text-align: left; padding: 0; border: none; margin-top: 20px; }
+    .btn-donate {
+        color: var(--preto);
+        background: transparent;
+        border: 2px solid var(--preto);
+        padding: 10px;
+        text-decoration: none;
+        text-transform: uppercase;
+        font-weight: bold;
+        transition: 0.3s;
+    }
+    .btn-donate:hover {
+        background: var(--preto);
+        color: var(--amarelo);
+    }
+
+    footer { 
+        text-align: left; 
+        color: var(--preto);
+        font-size: 0.8rem;
+        font-weight: bold;
+        margin-top: 100px; 
+        border-top: 1px solid var(--preto);
+        padding: 10px 0;
+    }
+
+    strong { background-color: var(--preto); color: var(--amarelo); padding: 0 4px; }
+</style>
+   
    
 </head>
 <body>
