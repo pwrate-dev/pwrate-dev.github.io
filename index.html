@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -18,15 +19,19 @@
 <style>
     :root {
         --amarelo: #FFEA00; 
-        --preto: #000000;
-        --branco: #ffffff;
+        --preto: #0c0c0c;
+        --branco: #e0e0e0;
+        --cinza-borda: #444444;
+        --sangue: #8b0000;
     }
 
-    
     body {
         margin: 0;
         padding: 40px 20px;
         background-color: var(--preto);
+        /* Scanlines CRT e ruído visual sutil dos anos 90 */
+        background-image: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.05), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.05));
+        background-size: 100% 4px, 6px 100%;
         color: var(--branco);
         font-family: "Courier New", Courier, monospace;
         display: flex;
@@ -36,9 +41,11 @@
     .main-container {
         max-width: 850px;
         width: 100%;
-        background-color: transparent;
-        border: none;
-        padding: 0;
+        background-color: #121212;
+        /* Moldura de pergaminho digital / interface antiga */
+        border: 4px double var(--amarelo);
+        padding: 25px;
+        box-shadow: 12px 12px 0px #000;
     }
 
     /* CASTELO ASCII */
@@ -50,75 +57,123 @@
         text-align: center;
         margin-bottom: 50px;
         overflow-x: auto;
+        background: #000;
+        padding: 15px;
+        border: 2px dashed var(--cinza-borda);
     }
 
     header {
         text-align: center;
-        border: none;
-        padding: 0;
+        border-bottom: 3px double var(--amarelo);
+        padding-bottom: 20px;
         margin-bottom: 50px;
     }
 
-    
     h1, h2 {
         color: var(--amarelo);
         text-transform: uppercase;
         letter-spacing: 2px;
         margin: 30px 0 15px 0;
-        border: none;
         display: block;
     }
 
-    
+    h2 {
+        background-color: var(--sangue);
+        color: var(--branco);
+        padding: 6px 12px;
+        font-size: 1.2rem;
+        border: 1px solid var(--amarelo);
+    }
+
+    /* Marquee Brutalista Clássico */
     .marquee-brutal {
-        color: var(--amarelo);
-        padding: 10px 0;
+        color: var(--preto);
+        background-color: var(--amarelo);
+        padding: 8px;
         font-weight: bold;
-        border: none;
         margin-bottom: 40px;
         text-transform: uppercase;
+        border: 2px solid var(--branco);
+        overflow: hidden;
+        white-space: nowrap;
+        text-align: center;
     }
 
     .secao { 
         margin-bottom: 70px; 
-        padding: 0;
+        padding: 20px;
+        border: 1px solid var(--cinza-borda);
+        background-color: #161616;
     }
 
-    
+    /* Caixa de Download estilo DOS/Shareware */
     .download-box {
-        text-align: left; 
+        text-align: center; 
         margin-top: 20px;
+        background-color: #000;
+        padding: 25px;
+        border: 3px ridge var(--amarelo);
     }
     
     .btn-download {
-        color: var(--amarelo);
-        background-color: transparent;
+        color: var(--preto);
+        background-color: var(--amarelo);
         font-size: 1.4rem;
         font-weight: bold;
         text-transform: uppercase;
         text-decoration: none;
         display: inline-block;
-        transition: 0.3s;
+        padding: 10px 25px;
+        border: 3px outset var(--branco);
+        transition: 0.1s;
     }
 
     .btn-download:hover {
-        color: var(--branco);
-        text-decoration: underline;
+        color: var(--amarelo);
+        background-color: var(--preto);
+        border: 3px inset var(--branco);
+        cursor: pointer;
     }
 
-    
+    /* Container de Vídeo Rígido */
     .video-container {
-        border: none;
+        border: 4px solid var(--cinza-borda);
         margin: 30px 0;
         background: #000;
         aspect-ratio: 16/9;
     }
     .video-container iframe { width: 100%; height: 100%; border: none; }
 
-    .galeria { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
-    .card-foto { border: none; padding: 0; text-align: left; }
-    .card-foto img { width: 100%; display: block; border: none; }
-    .card-foto span { color: var(--amarelo); font-size: 0.8rem; display: block; margin-top: 10px; }
+    /* Galeria Crua */
+    .galeria { 
+        display: grid; 
+        grid-template-columns: 1fr 1fr; 
+        gap: 30px; 
+    }
+
+    @media (max-width: 600px) {
+        .galeria { grid-template-columns: 1fr; }
+    }
+
+    .card-foto { 
+        border: 2px solid var(--cinza-borda); 
+        padding: 12px; 
+        text-align: left;
+        background: #000;
+    }
+    .card-foto img { 
+        width: 100%; 
+        display: block; 
+        border: 1px solid var(--cinza-borda);
+        filter: grayscale(20%) contrast(110%);
+    }
+    .card-foto span { 
+        color: var(--amarelo); 
+        font-size: 0.8rem; 
+        display: block; 
+        margin-top: 10px;
+        font-style: italic;
+    }
 
     .perfil-container {
         border: none;
@@ -135,333 +190,136 @@
     
     .foto-autor-foda {
         width: 320px; 
-        border: none;
+        max-width: 100%;
+        border: 3px solid var(--amarelo);
+        padding: 5px;
+        background: #000;
     }
 
-   
-    .donate-container { text-align: left; padding: 0; border: none; margin-top: 20px; }
+    /* Tag de Texto Piscante Retro opcional */
+    .blink {
+        animation: blinker 1.2s linear infinite;
+    }
+    @keyframes blinker {
+        50% { opacity: 0; }
+    }
+
+    /* Caixa de Tributo / Doação */
+    .donate-container { 
+        text-align: left; 
+        padding: 20px; 
+        border: 2px dashed var(--amarelo); 
+        margin-top: 20px;
+        background: #000;
+    }
     .btn-donate {
         color: var(--amarelo);
         text-decoration: underline;
         text-transform: uppercase;
         font-weight: bold;
-        transition: 0.3s;
+        transition: 0.2s;
     }
     .btn-donate:hover {
         color: var(--branco);
+        background-color: var(--sangue);
     }
 
     footer { 
-        text-align: left; 
-        color: #444;
-        font-size: 0.8rem;
- <style>
-    :root {
-        /* Cores Invertidas */
-        --amarelo: #FFEA00; 
-        --preto: #000000;
-        --branco: #ffffff;
+        text-align: center; 
+        color: #555;
+        font-size: 0.85rem;
+        margin-top: 60px;
+        border-top: 1px dashed var(--cinza-borda);
+        padding-top: 20px;
     }
-
-    body {
-        margin: 0;
-        padding: 40px 20px;
-        background-color: var(--amarelo); /* Fundo agora é amarelo */
-        color: var(--preto); /* Letras agora são pretas */
-        font-family: "Courier New", Courier, monospace;
-        display: flex;
-        justify-content: center;
-    }
-
-    .main-container {
-        max-width: 850px;
-        width: 100%;
-        background-color: transparent;
-        border: none;
-        padding: 0;
-    }
-
-    /* CASTELO ASCII */
-    .ascii-header {
-        color: var(--preto); /* ASCII em preto para aparecer no fundo amarelo */
-        white-space: pre;
-        font-size: 10px;
-        line-height: 1.2;
-        text-align: center;
-        margin-bottom: 50px;
-        overflow-x: auto;
-    }
-
-    header {
-        text-align: center;
-        border: none;
-        padding: 0;
-        margin-bottom: 50px;
-    }
-    
-    h1, h2 {
-        color: var(--preto); /* Títulos em preto */
-        text-transform: uppercase;
-        letter-spacing: 2px;
-        margin: 30px 0 15px 0;
-        border-bottom: 2px solid var(--preto); /* Linha sutil para separar */
-        display: inline-block;
-    }
-    
-    .marquee-brutal {
-        color: var(--preto);
-        padding: 10px 0;
-        font-weight: bold;
-        border-top: 2px solid var(--preto);
-        border-bottom: 2px solid var(--preto);
-        margin-bottom: 40px;
-        text-transform: uppercase;
-    }
-
-    .secao { 
-        margin-bottom: 70px; 
-        padding: 0;
-    }
-
-    .download-box {
-        text-align: left; 
-        margin-top: 20px;
-        border: 2px solid var(--preto); /* Box visível no fundo amarelo */
-        padding: 20px;
-    }
-    
-    .btn-download {
-        color: var(--preto);
-        background-color: transparent;
-        font-size: 1.4rem;
-        font-weight: bold;
-        text-transform: uppercase;
-        text-decoration: underline;
-        display: inline-block;
-        transition: 0.3s;
-    }
-
-    .btn-download:hover {
-        background-color: var(--preto);
-        color: var(--amarelo);
-    }
-
-    .video-container {
-        border: 5px solid var(--preto);
-        margin: 30px 0;
-        background: #000;
-        aspect-ratio: 16/9;
-    }
-
-    .galeria { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
-    .card-foto { border: 2px solid var(--preto); padding: 5px; text-align: left; background: var(--amarelo); }
-    .card-foto img { width: 100%; display: block; filter: grayscale(100%); transition: 0.3s; }
-    .card-foto img:hover { filter: none; }
-    .card-foto span { color: var(--preto); font-weight: bold; font-size: 0.8rem; display: block; margin-top: 10px; }
-
-    .perfil-container {
-        border: none;
-        padding: 0;
-    }
-    
-    .perfil-fotos-grid {
-        display: flex;
-        justify-content: flex-start;
-        gap: 30px;
-        flex-wrap: wrap;
-        margin-top: 20px;
-    }
-    
-    .foto-autor-foda {
-        width: 320px; 
-        border: 3px solid var(--preto);
-        filter: grayscale(100%);
-    }
-
-    .donate-container { text-align: left; padding: 0; border: none; margin-top: 20px; }
-    .btn-donate {
-        color: var(--preto);
-        background: transparent;
-        border: 2px solid var(--preto);
-        padding: 10px;
-        text-decoration: none;
-        text-transform: uppercase;
-        font-weight: bold;
-        transition: 0.3s;
-    }
-    .btn-donate:hover {
-        background: var(--preto);
-        color: var(--amarelo);
-    }
-
-    footer { 
-        text-align: left; 
-        color: var(--preto);
-        font-size: 0.8rem;
-        font-weight: bold;
-        margin-top: 100px; 
-        border-top: 1px solid var(--preto);
-        padding: 10px 0;
-    }
-
-    strong { background-color: var(--preto); color: var(--amarelo); padding: 0 4px; }
 </style>
-   
-   
 </head>
 <body>
 
-    <div class="main-container">
-        <div class="ascii-header">                                                                                                                     
-                                                                                                                       
-                                                                                                                       
-                                                                                                                       
-                                                                                                                       
-                                                           +*#########*=                                               
-                                                           +####*+#####+                                               
-                                                           +###+:-=####+                                               
-                                                           +###########+                                               
-                                                           =+++++++++++=                                               
-                                                           ==                                                          
-                                                          .-:                                                          
-                                                         ......                                                        
-                                                       ..:-==:...                                                      
-                                                     ...-=++++=:...                                                    
-                                                   ...-==========:...                                                  
-                                                  ..:=+++++++++++==...                                                 
-                                               ...:-================-:..                                               
-                                              ...+=====================...                                             
-                                            ...-=++++++++++++++++++++++=-...                                           
-                                          ...-============================:...                                         
-                                          ..:----.::---=========--::.:--:--:....                                       
-                                          ......---=+*##%%%%%%%##+==--:..........                                      
-                        ....                ....--==+*##%%%%%%%##+==---..........           ...                        
-                       ......                 ..--==+*##%%%%%%%##+==---.....               ......                      
-                     ...-==-...               ..--==+*###########+==---.....            ...:-==-...                    
-                   ...-=++++=-...             ..--==+*#**-.:===+*+==---.....           ...-=+==+=:...                  
-                 ...-==========-...           ..--==+*#*-.:=====*+==---.....         ...-==========-...                
-               ...:=++++++++++++=:...         ..--==+*#*-.:=====*+==---.....       ...-==============....              
-             ...:-=================-...       ..--==+*#*-.:=====*+==---.....     ...-=+++++++++++++++=-:..             
-           ....======================:...     ..--==+*#*-.:=====*+==---.....   ...:=====================-....          
-          ...-=++++++++++++++++++++++=-:..    ..--==+*#*++++++++*+==---.....  ..:-==++++++++++++++++++++==-...         
-        ...:=---:.:::::::-:::::::...---=:.... ..--==+*##%%%%%%%##+==---..... ............:::::--:::::..........        
-        .........:==+**#####**+==--:............--==+*##%%%%%%%##+==---.....  .......:---==+*#%%#*+==--:.........      
-            .....:==+**#####**+==---.............-==+*#.........:+==---.......  .....:---==+*#%%#*+==--:.........      
-                .:==+**#####**+==---.......=--=-.-==+*#.-==-===::+==----::::.........:---==+****#*+==--:...            
-                .:==+*+====+**+==---...:--------::..:::.-------:.::..::.::..::------.:---=++++++*++==--:...            
-                .:==*=...::::++==---...:--------------------------------------------.:---=+-...:-++==--:...            
-                .:==*=..:---:=+==---...---===--==--===-====-==--==-==--==--===--=--=.:---=+-..---++==--:...            
-                .:==*=.:----:=+==---...-==-===--==--===--===-==--==--==-==--===--===.:---=+-..---=+==--:...            
-                .:==*=..:::::=+==---...:---..:::::.:---..::::::::.--:.::::..--------.:---=+-::---++==--:...            
-                .:==+*********+==---...:---.=+++++:..:-.-+++++++=.--:-++++=-..------.:---=++*#%%#*+==--:...            
-                .:==+**#####**+==---...-==-.=+++++++=:.:=+++++++=:...-+++++-..==--==.:---==+*#%%#*+==--:...            
-                .:==+**#####**+==---...:-=-.=++++++++++++++++++++++++++++++-..--===-.:---==+*#%%#*+==--:...            
-                .:==+**#####**+==---...:---.--=++++++++++++--=+++++++++++==-..------.:---==+*#%%#*+==--:...            
-                .:==+**#####**+==---...:----..:+++++++++-:.:*..::++++++++:...-------.:---==+*#%%#*+==--:...            
-                .:==+**#####**+==---...:-===:.:+++++++++:+%%%%%=:++++++++:...-====--.:---==+*#%%#*+==--:...            
-                .:==+**#####**+==---...-===-..:+++++++++::-###=.:++++++++:..:-==--==.:---==+*#%%#*+==--:...            
-      .......   ..---==+*+====--=--:...:----..:++++++++++=-----=+++++++++:...-::::::.:--::--==*%#+--::-:...........    
-     ..:---:... .:--=-:-+.----:.--:.---::---..:++=++=++==++==++==+++==+++:...-.-----.:-:.-----:%#-:--.::...-----....   
-     ..---=-::...:==--::::---=-.::..==-:::::..:++++++++++++++++++++++++++-...:.---==..:::=----:##-:=-.:...:==---.....  
-     ..=====================================:.:+++++++++++++++++++++++++++:.:========:..:====-....:============-.....  
-     ..===--==--==----==--==--==---==--==----.:+++++++++-------=++++++++++:.:=--==--==-==--==-===-==--==-==--==-.....  
-     ..---==--=----=----=---==---=---=----=-.-+++=++=++..-=-==:.:+++==+++=:..-=----=--==--=---=--==--=---=--=---.....  
-     ..-=----=--==---==---==--==--==--=====-.=++++++=--.-==-===:.--=++++++:.:=---==--==--=--==--==--=--==--==-=-.....  
-     ..=====================================:-++++++=:=====-=====-.=++++++:.:==================================-.....  
-     ..--===---==-==---===--==--==-======---:-++++++=:=====-=====-.=++++++:..--==---==-======-===-===-==-==--==-.....  
-     ..-=----=----=--=----=----=---=--=---=-.-====++-:=====-=====-.=++====:..-=----=---=--=---=--=---=---=--=---.....  
-     ...--==--=-----==-==---==---==--=--==--.-++++++=:=====-=====-.=++++++:.:=---==--==--=--==--==--=--==--==-=-.....  
-      ..====================================:=++++++=:=====-=====-.=++++++:.:==================================-.....  
-      ..-==--:::::::-==---==--==--==---==-==:-++++++=:=====-=====-.=+++++:.:--==--==--==-:::::::::--===-==--==--.....  
-      .......................................=++====-:=====-=====-.===++=:...........................................  
-      ...............................................................................................................  
-           ..........................................................................................................
-            
-        </div>
+<div class="main-container">
 
-        <div class="marquee-brutal">
-            <marquee scrollamount="10"> [: SaturvOs v0.5 CASTLE :: DESENVOLVIDO EM ASSEMBLY E C :: O CASTELO VIRTUAL DO PWRAT :: SISTEMA INTERLIGADO :: SEM INTERNET :: SEM ABIN :: SEM POLÍCIA FEDERAL :: MORTE A NOVA SOCIEDADE :: MORTE AO JOGADOR CARO :] </marquee>
-        </div>
-
-        <header>
-            <h1>SaturvOS</h1>
-            <p>"Um Sistema Feito da Carne de uma pessoa solitária."</p>
-        </header>
-
-        <section class="secao">
-        
-            <div class="download-box">
-                <p>Versão Alpha 0.5 "Castle". Rode no QEMU, Bochs ou VirtualBox.</p>
-                <a href="https://github.com/pwrate-dev/pwrate-dev.github.io/releases/tag/v0.5">Baixa_SaturvOS.IMG</a>
-                <p style="font-size: 0.8rem; margin-top: 15px; color: var(--amarelo);">FORMATO: .IMG | BOOTABLE: YES</p>
-            </div>
-        </section>
-
-        <section class="secao">
-            
-            <div style="border-left: 4px solid var(--amarelo); padding-left: 20px; margin-bottom: 30px;">
-                <p style="font-weight: bold; color: var(--amarelo);">
-                    "4 anos de isolamento social. Sem contatos profundos. Encontrei a verdadeira sabedoria nestas linhas de código."
-                </p>
-                <p>
-                    Tornei-me um <strong>Príncipe de Baixo Nível</strong>. No Ring-0, eu sou o soberano. 
-                    Enquanto o mundo se perde no superficial, meu único incentivo de viver é o reinado de <strong>Saturv</strong> e a beleza da sua arquitetura pura.
-                </p>
-            </div>
-
-            <div class="video-container">
-                <iframe src="https://www.youtube.com/embed/6qaY6i1mDYY" allowfullscreen></iframe>
-            </div>
-            
-            <div class="galeria">
-                <div class="card-foto"><img src="saturvos1.png"><span>MEMÓRIA_16BIT</span></div>
-                <div class="card-foto"><img src="saturvos2.png"><span>ASCENSÃO_32BIT</span></div>
-            </div>
-        </section>
-
-        <section class="secao">
-        
-            <div class="perfil-container">
-                <p><strong>João V. Gabriel (PWRAT)</strong>. Arquiteto do SaturvOs.</p>
-                <div class="perfil-fotos-grid">
-                    <img src="pwrat1.png" class="foto-autor-foda">
-                    <img src="pwrat2.png" class="foto-autor-foda">
-                </div>
-            </div>
-        </section>
-
-        <section class="secao">
-            
-            <div style="background: #111; padding: 10px; border: 1px solid var(--amarelo);">
-                <script src="https://giscus.app/client.js"
-                        data-repo="pwrate-dev/pwrate-dev.github.io"
-                        data-repo-id="R_kgDORHG_Nw"
-                        data-category="General"
-                        data-category-id="DIC_kwDORHG_N84C2BkA"
-                        data-mapping="pathname"
-                        data-strict="0"
-                        data-reactions-enabled="1"
-                        data-emit-metadata="0"
-                        data-input-position="top"
-                        data-theme="dark"
-                        data-lang="pt"
-                        crossorigin="anonymous"
-                        async>
-                </script>
-            </div>
-        </section>
-
-        <section class="secao">
-            
-            <div class="donate-container">
-                <a href="https://livepix.gg/pwrate" target="_blank" class="btn-donate">APOIAR_VIA_LIVEPIX</a>
-            </div>
-        </section>
-
-        <footer>
-            SATURVOS // 2026 // PWRAT // MG
-        </footer>
+    <div class="ascii-header">
+     _   _   _   _   _   _   _   _   _   _ 
+    / \ / \ / \ / \ / \ / \ / \ / \ / \ / \
+   ( S | a | t | u | r | v | O | S |   |   )
+    \_/ \_/ \_/ \_/ \_/ \_/ \_/ \_/ \_/ \_/
+               [ CASTELO VIRTUAL ]
+                  ===|===
+                     |
+                 .-""`""-.
+                /  _   _  \
+                | | | | | |
+                | |_| |_| |
+                |         |
+                |_________|
     </div>
+
+    <header>
+        <h1>SaturvOS</h1>
+        <p>O Castelo Virtual de um Príncipe de Baixo Nível.</p>
+    </header>
+
+    <div class="marquee-brutal">
+        ++ BEM-VINDO À MASMORRA DO DESENVOLVIMENTO KERNEL ++ 32-BIT OS EM ASSEMBLY & C ++
+    </div>
+
+    <div class="secao">
+        <h2>## O PROJETO</h2>
+        <p>SaturvOS é um sistema operacional independente construído do zero absoluto. Sem kernels prontos, sem atalhos. Apenas puro código interagindo diretamente com o hardware.</p>
+        
+        <div class="download-box">
+            <p class="blink" style="color: var(--amarelo); margin-top: 0;">[ DISCO DE INICIALIZAÇÃO DISPONÍVEL ]</p>
+            <a href="#" class="btn-download">Download .ISO v0.1</a>
+        </div>
+    </div>
+
+    <div class="secao">
+        <h2>## DEMONSTRAÇÃO</h2>
+        <div class="video-container">
+            <iframe src="" frameborder="0" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <div class="secao">
+        <h2>## PERGAMINHOS VISUAIS (GALERIA)</h2>
+        <div class="galeria">
+            <div class="card-foto">
+                <img src="screenshot1.jpg" alt="SaturvOS carregando o Kernel">
+                <span>Fig 1.0 - Primeira quebra de barreira no Modo Protegido de 32-bits.</span>
+            </div>
+            <div class="card-foto">
+                <img src="screenshot2.jpg" alt="Interface de Linha de Comando">
+                <span>Fig 1.1 - Shell rústico interpretando comandos de baixo nível.</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="secao">
+        <h2>## O ARQUITETO</h2>
+        <div class="perfil-container">
+            <p>Desenvolvido de forma misantrópica nas madrugadas frias por João V. Gabriel (PWRAT).</p>
+            <div class="perfil-fotos-grid">
+                <img src="autor.jpg" class="foto-autor-foda" alt="PWRAT">
+            </div>
+        </div>
+    </div>
+
+    <div class="secao">
+        <h2>## OFERENDA / TRIBUTO</h2>
+        <div class="donate-container">
+            <p>Mantenha o desenvolvedor acordado alimentando a máquina com café ou criptoativos.</p>
+            <a href="#" class="btn-donate">Enviar Moedas de Ouro (Donate)</a>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 SaturvOS. Todos os direitos reservados aos fantasmas da máquina.</p>
+    </footer>
+
+</div>
 
 </body>
 </html>
+
+```
+
