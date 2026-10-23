@@ -5,239 +5,107 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SaturvOS</title>
 
-    <meta name="keywords" content="pwrat,saturno,morte,solidão,melhor programador, misantropia, insonia,saturvos, sistema operacional, 32-bit OS, João V. Gabriel, kernel development, assembly, C">
+    <meta name="keywords" content="pwrat,saturvos,sistema operacional,32-bit,assembly,C">
     <meta name="author" content="PWRAT">
 
-    <meta property="og:title" content="SaturvOs">
-    <meta property="og:description" content="O Castelo Virtual de um Príncipe de Baixo Nível.">
-    <meta property="og:url" content="https://pwrate-dev.github.io/">
-    
-    <link rel="icon" href="logo.jpg" type="image/png">
-    <link rel="shortcut icon" href="logo.jpg" type="image/jpg">
+    <style>
+        :root {
+            --amarelo: #FFEA00; 
+            --preto: #0c0c0c;
+            --branco: #e0e0e0;
+        }
 
-<style>
-    :root {
-        --amarelo: #FFEA00; 
-        --preto: #0c0c0c;
-        --branco: #e0e0e0;
-        --cinza-borda: #444444;
-        --sangue: #8b0000;
-    }
+        body {
+            margin: 0;
+            padding: 40px 20px;
+            background-color: var(--preto);
+            color: var(--branco);
+            font-family: "Courier New", Courier, monospace;
+            display: flex;
+            justify-content: center;
+        }
 
-    body {
-        margin: 0;
-        padding: 40px 20px;
-        background-color: var(--preto);
-        color: var(--branco);
-        font-family: "Courier New", Courier, monospace;
-        display: flex;
-        justify-content: center;
-    }
+        .main-container {
+            max-width: 600px;
+            width: 100%;
+            background-color: #121212;
+            border: 2px solid var(--amarelo);
+            padding: 30px;
+        }
 
-    .main-container {
-        max-width: 800px;
-        width: 100%;
-        background-color: #121212;
-        border: 2px solid var(--amarelo);
-        padding: 25px;
-    }
+        header {
+            text-align: center;
+            border-bottom: 2px solid var(--amarelo);
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
 
-    header {
-        text-align: center;
-        border-bottom: 2px solid var(--amarelo);
-        padding-bottom: 20px;
-        margin-bottom: 30px;
-    }
+        h1 {
+            color: var(--amarelo);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin: 0 0 10px 0;
+        }
 
-    h1, h2 {
-        color: var(--amarelo);
-        text-transform: uppercase;
-        letter-spacing: 2px;
-        margin: 20px 0 10px 0;
-    }
+        p {
+            margin: 0;
+            color: #aaa;
+            font-size: 0.9rem;
+        }
 
-    h2 {
-        background-color: var(--sangue);
-        color: var(--branco);
-        padding: 6px 12px;
-        font-size: 1.1rem;
-        border: 1px solid var(--amarelo);
-    }
+        .links-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
 
-    .secao { 
-        margin-bottom: 40px; 
-        padding: 15px;
-        border: 1px solid var(--cinza-borda);
-        background-color: #161616;
-    }
+        .links-list li a {
+            display: block;
+            background-color: #000;
+            color: var(--amarelo);
+            text-decoration: none;
+            padding: 15px 20px;
+            border: 1px solid var(--amarelo);
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: 0.1s;
+        }
 
-    .download-box {
-        text-align: center; 
-        background-color: #000;
-        padding: 20px;
-        border: 2px solid var(--amarelo);
-    }
-    
-    .btn-download {
-        color: var(--preto);
-        background-color: var(--amarelo);
-        font-size: 1.2rem;
-        font-weight: bold;
-        text-transform: uppercase;
-        text-decoration: none;
-        display: inline-block;
-        padding: 10px 20px;
-        border: 2px solid var(--branco);
-    }
+        .links-list li a:hover {
+            background-color: var(--amarelo);
+            color: var(--preto);
+        }
 
-    .btn-download:hover {
-        color: var(--amarelo);
-        background-color: var(--preto);
-        cursor: pointer;
-    }
-
-    .galeria { 
-        display: grid; 
-        grid-template-columns: 1fr 1fr; 
-        gap: 20px; 
-    }
-
-    @media (max-width: 600px) {
-        .galeria { grid-template-columns: 1fr; }
-    }
-
-    .card-foto { 
-        border: 1px solid var(--cinza-borda); 
-        padding: 10px; 
-        background: #000;
-    }
-    .card-foto img { 
-        width: 100%; 
-        display: block; 
-        border: 1px solid var(--cinza-borda);
-    }
-    .card-foto span { 
-        color: var(--amarelo); 
-        font-size: 0.8rem; 
-        display: block; 
-        margin-top: 8px;
-        font-style: italic;
-    }
-
-    .perfil-fotos-grid {
-        display: flex;
-        gap: 20px;
-        flex-wrap: wrap;
-        margin-top: 15px;
-    }
-    
-    .foto-autor-foda {
-        width: 280px; 
-        max-width: 100%;
-        border: 2px solid var(--amarelo);
-        padding: 4px;
-        background: #000;
-    }
-
-    .donate-container { 
-        padding: 15px; 
-        border: 1px dashed var(--amarelo); 
-        background: #000;
-    }
-    
-    .btn-donate {
-        color: var(--amarelo);
-        text-decoration: underline;
-        text-transform: uppercase;
-        font-weight: bold;
-    }
-
-    footer { 
-        text-align: center; 
-        color: #555;
-        font-size: 0.85rem;
-        margin-top: 40px;
-        border-top: 1px dashed var(--cinza-borda);
-        padding-top: 15px;
-    }
-
-    strong { background-color: var(--amarelo); color: var(--preto); padding: 0 3px; }
-</style>
+        footer {
+            text-align: center;
+            color: #555;
+            font-size: 0.8rem;
+            margin-top: 40px;
+            border-top: 1px dashed #333;
+            padding-top: 20px;
+        }
+    </style>
 </head>
 <body>
 
 <div class="main-container">
-
     <header>
         <h1>SaturvOS</h1>
-        <p>"O Castelo Virtual de um Príncipe de Baixo Nível."</p>
+        <p>O Castelo Virtual de um Príncipe de Baixo Nível.</p>
     </header>
 
-    <section class="secao">
-        <h2>## Baixar</h2>
-        <div class="download-box">
-            <p>Versão Alpha 0.5 "Castle" (Assembly e C). Rode no QEMU, Bochs ou VirtualBox.</p>
-            <a href="https://github.com/pwrate-dev/pwrate-dev.github.io/releases/tag/v0.5" class="btn-download">Baixar SaturvOS.IMG</a>
-            <p style="font-size: 0.8rem; margin-top: 10px; color: #888;">FORMATO: .IMG | BOOTABLE: YES</p>
-        </div>
-    </section>
-
-    <section class="secao">
-        <h2>## Registros</h2>
-        <p style="font-weight: bold; color: var(--amarelo);">
-            "5 anos de isolamento social. Sem contatos profundos. Encontrei a verdadeira sabedoria nestas linhas de código."
-        </p>
-        <p>
-            Tornei-me um <strong>Príncipe de Baixo Nível</strong>. No Ring-0, eu sou o soberano. 
-            Enquanto o mundo se perde no superficial, meu único incentivo de viver é o reinado de <strong>Saturv</strong> e a beleza da sua arquitetura pura.
-        </p>
-
-        <div class="galeria" style="margin-top: 20px;">
-            <div class="card-foto"><img src="saturvos1.png" alt="SaturvOS Memória"><span>MEMÓRIA_16BIT</span></div>
-            <div class="card-foto"><img src="saturvos2.png" alt="SaturvOS Ascensão"><span>ASCENSÃO_32BIT</span></div>
-        </div>
-    </section>
-
-    <section class="secao">
-        <h2>## O Arquiteto</h2>
-        <p><strong>João V. Gabriel (PWRAT)</strong>. Arquiteto do SaturvOs.</p>
-        <div class="perfil-fotos-grid">
-            <img src="pwrate1.png" class="foto-autor-foda" alt="PWRAT Foto 1">
-            <img src="pwrate2.png" class="foto-autor-foda" alt="PWRAT Foto 2">
-        </div>
-    </section>
-
-    <section class="secao">
-        <h2>## Comentários</h2>
-        <div style="background: #000; padding: 15px; border: 1px solid var(--cinza-borda);">
-            <script src="https://giscus.app/client.js"
-                    data-repo="pwrate-dev/pwrate-dev.github.io"
-                    data-repo-id="R_kgDORHG_Nw"
-                    data-category="General"
-                    data-category-id="DIC_kwDORHG_N84C2BkA"
-                    data-mapping="pathname"
-                    data-strict="0"
-                    data-reactions-enabled="1"
-                    data-emit-metadata="0"
-                    data-input-position="top"
-                    data-theme="dark"
-                    data-lang="pt"
-                    crossorigin="anonymous"
-                    async>
-            </script>
-        </div>
-    </section>
-
-    <section class="secao">
-        <h2>## Tributo</h2>
-        <div class="donate-container">
-            <p style="margin-top: 0; margin-bottom: 10px;">Alimente o desenvolvimento diretamente na masmorra:</p>
-            <a href="https://livepix.gg/pwrate" target="_blank" class="btn-donate">APOIAR_VIA_LIVEPIX</a>
-        </div>
-    </section>
+    <ul class="links-list">
+        <li><a href="https://github.com/pwrate-dev/pwrate-dev.github.io/releases/tag/v0.5" target="_blank">[+] Baixar SaturvOS.IMG (v0.5)</a></li>
+        <li><a href="https://github.com/pwrate-dev" target="_blank">[+] GitHub / Repositórios</a></li>
+        <li><a href="https://livepix.gg/pwrate" target="_blank">[+] Apoiar (LivePix)</a></li>
+    </ul>
 
     <footer>
-        SATURVOS // 2026 // PWRAT // MG
+        SATURVOS // 2026 // PWRAT
     </footer>
 </div>
 
