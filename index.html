@@ -8,6 +8,9 @@
     <meta name="keywords" content="pwrat,saturvos,sistema operacional,32-bit,assembly,C">
     <meta name="author" content="PWRAT">
 
+    <link rel="icon" href="logo.jpg" type="image/png">
+    <link rel="shortcut icon" href="logo.jpg" type="image/jpg">
+
     <style>
         :root {
             --amarelo: #FFEA00; 
@@ -31,13 +34,21 @@
             background-color: #121212;
             border: 2px solid var(--amarelo);
             padding: 30px;
+            text-align: center;
         }
 
         header {
-            text-align: center;
             border-bottom: 2px solid var(--amarelo);
             padding-bottom: 20px;
             margin-bottom: 30px;
+        }
+
+        .logo-img {
+            width: 80px;
+            height: 80px;
+            border: 2px solid var(--amarelo);
+            object-fit: cover;
+            margin-bottom: 15px;
         }
 
         h1 {
@@ -59,29 +70,25 @@
             margin: 0;
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 20px;
         }
 
         .links-list li a {
-            display: block;
-            background-color: #000;
             color: var(--amarelo);
             text-decoration: none;
-            padding: 15px 20px;
-            border: 1px solid var(--amarelo);
             font-weight: bold;
             text-transform: uppercase;
             letter-spacing: 1px;
+            font-size: 1.1rem;
             transition: 0.1s;
         }
 
         .links-list li a:hover {
-            background-color: var(--amarelo);
-            color: var(--preto);
+            color: var(--branco);
+            text-decoration: underline;
         }
 
         footer {
-            text-align: center;
             color: #555;
             font-size: 0.8rem;
             margin-top: 40px;
@@ -94,6 +101,7 @@
 
 <div class="main-container">
     <header>
+        <img src="logo.jpg" alt="Logo SaturvOS" class="logo-img">
         <h1>SaturvOS</h1>
         <p>O Castelo Virtual de um Príncipe de Baixo Nível.</p>
     </header>
