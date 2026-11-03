@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SaturvOS // Blog</title>
+    <style>
+        :root {
+            --amarelo: #FFEA00;
+            --preto: #0c0c0c;
+            --branco: #e0e0e0;
+        }
+
+        body {
+            margin: 0;
+            padding: 40px 20px;
+            background-color: var(--preto);
+            color: var(--branco);
+            font-family: "Courier New", Courier, monospace;
+            display: flex;
+            justify-content: center;
+        }
+
+        .main-container {
+            max-width: 600px;
+            width: 100%;
+        }
+
+        header {
+            margin-bottom: 40px;
+            border-bottom: 1px dashed #333;
+            padding-bottom: 20px;
+        }
+
+        h1 {
+            color: var(--amarelo);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin: 0 0 10px 0;
+        }
+
+        .back-link {
+            color: #aaa;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .back-link:hover {
+            color: var(--amarelo);
+        }
+
+        .entry {
+            margin-bottom: 40px;
+            border-left: 2px solid var(--amarelo);
+            padding-left: 15px;
+        }
+
+        .entry-date {
+            color: var(--amarelo);
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+
+        .entry-title {
+            font-size: 1.1rem;
+            margin: 0 0 10px 0;
+            color: var(--branco);
+        }
+
+        .entry-content {
+            color: #ccc;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+
+<div class="main-container">
+    <header>
+        <a href="index.html" class="back-link">&lt; Voltar para a Home</a>
+        <h1>Daily Log</h1>
+    </header>
+
+    <main>
+        <!-- Para adicionar um novo post, basta copiar este bloco .entry -->
+        <article class="entry">
+            <div class="entry-date">[2026-11-03]</div>
+            <h2 class="entry-title">Primeira entrada do log</h2>
+            <div class="entry-content">
+                Primeiro blog pessoal do pwrat e do saturvos nada aqui possa ser interessante 
+            </div>
+        </article>
+    </main>
+</div>
+
+</body>
+</html>
