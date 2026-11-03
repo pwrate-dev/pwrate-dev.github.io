@@ -3,17 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SaturvOS // Blog</title>
+    <title>SaturvOS // Raw Log</title>
+
+    <meta name="keywords" content="pwrat,saturvos,blog,assembly,kernel">
+    <meta name="author" content="PWRAT">
+
+    <link rel="icon" href="logo.jpg" type="image/png">
+
     <style>
         :root {
-            --amarelo: #FFEA00;
+            --amarelo: #FFEA00; 
             --preto: #0c0c0c;
+            --cinza-escuro: #161616;
+            --cinza-texto: #aaa;
             --branco: #e0e0e0;
         }
 
         body {
             margin: 0;
-            padding: 40px 20px;
+            padding: 30px 15px;
             background-color: var(--preto);
             color: var(--branco);
             font-family: "Courier New", Courier, monospace;
@@ -22,56 +30,98 @@
         }
 
         .main-container {
-            max-width: 600px;
+            max-width: 680px;
             width: 100%;
         }
 
         header {
-            margin-bottom: 40px;
-            border-bottom: 1px dashed #333;
-            padding-bottom: 20px;
+            border-bottom: 2px dashed var(--amarelo);
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+        }
+
+        .system-status {
+            color: var(--amarelo);
+            font-size: 0.8rem;
+            margin-bottom: 15px;
+            word-spacing: -2px;
         }
 
         h1 {
             color: var(--amarelo);
             text-transform: uppercase;
             letter-spacing: 2px;
-            margin: 0 0 10px 0;
+            margin: 0 0 5px 0;
+            font-size: 1.5rem;
         }
 
-        .back-link {
-            color: #aaa;
+        .nav-back {
+            color: var(--cinza-texto);
             text-decoration: none;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
+            display: inline-block;
+            margin-top: 10px;
         }
 
-        .back-link:hover {
+        .nav-back:hover {
             color: var(--amarelo);
+            text-decoration: underline;
+        }
+
+        .divider {
+            color: #333;
+            margin: 25px 0;
+            user-select: none;
         }
 
         .entry {
-            margin-bottom: 40px;
-            border-left: 2px solid var(--amarelo);
-            padding-left: 15px;
+            margin-bottom: 35px;
         }
 
-        .entry-date {
+        .entry-header {
             color: var(--amarelo);
             font-weight: bold;
-            font-size: 0.9rem;
-            margin-bottom: 5px;
+            font-size: 0.95rem;
+            margin-bottom: 10px;
         }
 
         .entry-title {
+            color: var(--branco);
             font-size: 1.1rem;
             margin: 0 0 10px 0;
-            color: var(--branco);
+            text-transform: uppercase;
         }
 
         .entry-content {
             color: #ccc;
-            font-size: 0.95rem;
-            line-height: 1.5;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            white-space: pre-wrap; /* Mantem espacamentos e quebras brutas */
+        }
+
+        /* Estilo para trechos de código cru estilo TempleOS */
+        pre {
+            background-color: var(--cinza-escuro);
+            border: 1px solid #333;
+            border-left: 3px solid var(--amarelo);
+            padding: 12px;
+            overflow-x: auto;
+            color: var(--amarelo);
+            font-size: 0.85rem;
+            margin: 15px 0;
+        }
+
+        code {
+            font-family: "Courier New", Courier, monospace;
+        }
+
+        footer {
+            color: #444;
+            font-size: 0.75rem;
+            margin-top: 50px;
+            border-top: 1px solid #222;
+            padding-top: 15px;
+            text-align: center;
         }
     </style>
 </head>
@@ -79,20 +129,39 @@
 
 <div class="main-container">
     <header>
-        <a href="index.html" class="back-link">&lt; Voltar para a Home</a>
-        <h1>Daily BLog</h1>
+        <div class="system-status">
+            [SYS_STATUS: ONLINE] // [TARGET: x86_32] // [RELEASE: v0.5]
+        </div>
+        <h1>SATURVOS // DAILY_LOG</h1>
+        <a href="index.html" class="nav-back">&lt; [ESC] Voltar para Home</a>
     </header>
 
     <main>
-        
+        <!-- Post no formato cru -->
         <article class="entry">
-            <div class="entry-date">[2026-11-03]</div>
-            <h2 class="entry-title">Primeira entrada do log</h2>
-            <div class="entry-content">
-                Tentativa de criar um blog diário 
-            </div>
+            <div class="entry-header">[2026-11-03 14:00 // DEV_LOG]</div>
+            <h2 class="entry-title">Ajustes de memoria e rotina em Assembly</h2>
+            <div class="entry-content">Refatorando interrupções no kernel. Testando carregador de boot e escrita direta na memória de vídeo VGA (0xB8000).
+
+Código da rotina de impressão em tela:</div>
+<pre><code>mov ah, 0x0E    ; Teletype output
+mov al, 'A'     ; Caractere
+int 0x10        ; BIOS Video Service</code></pre>
+            <div class="entry-content">Nenhum wrapper extra, apenas acesso direto ao hardware.</div>
+        </article>
+
+        <div class="divider">==================================================</div>
+
+        <article class="entry">
+            <div class="entry-header">[2026-11-02 22:15 // SYSTEM]</div>
+            <h2 class="entry-title">Inicialização do Registro Diário</h2>
+            <div class="entry-content">Blog iniciado, aqui será aonde falarei sobre o Saturv sobre vídeos pendentes e sobre algumas ideias.</div>
         </article>
     </main>
+
+    <footer>
+        PWRAT // SATURVOS KERNEL LOGS // 2026
+    </footer>
 </div>
 
 </body>
