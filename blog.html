@@ -136,28 +136,37 @@
         <div class="entry-date">2026-11-05 21:56</div>
         <h2 class="entry-title">Odeio Pastas</h2>
         <div class="entry-content">Como eu odeio o sistema de pastas! 3 dias apenas trabalhando nisso e amanhã tem mais >:0</div>
-    </article>
+  
+  </article>
 </main>
 
-<main>
-<article class="entry">
-<div class="entry-date">2026-11-07 08:54 </div>
-<h2 class="entry-title">O Pesadelo da Memória</h2>
-<div class="entry-content">Por que me prensei por dias nesse problema?
-Em sistemas como o Windows ou Linux, ao criarmos um programa precisamos de mais espaço para alocar uma nova variável, ou até mesmo um array, como uma lista de arquivos. Para fazer isso, simplesmente chamamos a função realloc() presente na biblioteca padrão do C. E então o mágico sistema operacional vai encontrar um pedaço de RAM vago, colocar nossos dados nele e retornar o ponteiro. Tudo pronto!
-O que acontece quando você é o sistema operacional?
-Ai as coisas ficam complicadas. Em meu projeto de desenvolvimento do SaturvOS (bare metal) eu não possuo nenhuma biblioteca padrão, portanto, não tenho malloc(), free() ou realloc(). Eu falo diretamente com o Hardware, mexo na RAM bit a bit.
-Nos últimos 5 dias, o que me prendeu não foi o design da interface gráfica. O que me prendeu foi a parte de gerenciamento dinâmico da memória no Disco Virtual. Esse problema se resume a 3 pesadelos:
-A Dança dos Ponteiros
-Sempre que um novo arquivo é criado, renomeado ou movido no array disco_virtual, blocos inteiros de memória precisam ser deslocados. Se um único byte for calculado errado, a string que armazena o nome do arquivo não será mais encontrada pelo sistema. Isto fará com que o kernel leia lixo na memória, causando um crash no sistema todo.
-Sincronia com a Interface Gráfica
-A função draw_main_window() executa dezenas de frame por segundo. Se ela tentar ler o array de arquivos no exato milissegundo em que a memória está sendo movida para incluir um novo arquivo, sua tela irá apresentar uma fatal tela azul (ou, no meu caso, congelar). É isto que explica porque pela manhã, a tela de renomear de arquivos vinha bugando, ou não mostrando o nome dos arquivos corretamente.
-Fragmentação do Heap
-Como ainda não possuo um gerenciador de memória avançado, precisei criar uma lógica para que não houvesse "buracos" na memória após exclusão ou renomeação de arquivos. Isso garante que o text_buffer e os índices do disco estejam sempre perfeitamente alinhados.
-Conclusão
-Eu não estava criando um explorador de arquivos. Eu estava criando o próprio motor de memória para que ele pudesse existir. Na hora de criar tudo do zero, doa, os ponteiros não perdoam. Porém, quando apertamos ENTER e vemos o nome do arquivo sendo modificado diretamente na matriz da memória física, sem utilizar nenhum código de terceiros, é ai que percebemos o verdadeiro poder do baixo nível.</div>
-</article>
-</main>
+        <article class="entry">
+            <div class="entry-date">2026-11-07 08:54</div>
+            <h2 class="entry-title">O Pesadelo da Memória</h2>
+            <div class="entry-content">
+<p>Por que me prensei por dias nesse problema?</p>
+
+<p>Em sistemas como o Windows ou Linux, ao criarmos um programa e precisarmos de mais espaço para alocar uma nova variável ou um array (como uma lista de arquivos), simplesmente chamamos a função <code>realloc()</code> presente na biblioteca padrão do C. O sistema operacional encontra um pedaço de <strong>RAM</strong> vago, coloca nossos dados nele e retorna o ponteiro. Tudo pronto!</p>
+
+<p><strong>O que acontece quando VOCÊ é o sistema operacional?</strong></p>
+
+<p>Aí as coisas ficam complicadas. No desenvolvimento do <strong>SaturvOS</strong> (<em>bare metal</em>), eu não possuo nenhuma biblioteca padrão — portanto, não tenho <code>malloc()</code>, <code>free()</code> ou <code>realloc()</code>. Eu falo diretamente com o hardware, mexo na RAM bit a bit.</p>
+
+<p>Nos últimos 5 dias, o que me prendeu não foi o design da interface gráfica, mas o gerenciamento dinâmico de memória no Disco Virtual. Esse problema se resume a 3 pesadelos:</p>
+
+<p><strong>1. A Dança dos Ponteiros</strong><br>
+Sempre que um novo arquivo é criado, renomeado ou movido no array <code>disco_virtual</code>, blocos inteiros de memória precisam ser deslocados. Se um único byte for calculado errado, a string que armazena o nome do arquivo não será encontrada. O kernel lerá lixo na memória, causando um crash no sistema todo.</p>
+
+<p><strong>2. Sincronia com a Interface Gráfica</strong><br>
+A função <code>draw_main_window()</code> roda a dezenas de frames por segundo. Se ela tentar ler o array de arquivos no exato milissegundo em que a memória está sendo movida para incluir um novo arquivo, a tela irá congelar. Isso explica por que, pela manhã, a tela de renomear arquivos vinha bugando ou mostrando nomes incorretos.</p>
+
+<p><strong>3. Fragmentação do Heap</strong><br>
+Como ainda não possuo um gerenciador de memória avançado, precisei criar uma lógica para que não houvesse "buracos" na RAM após a exclusão ou renomeação de arquivos. Isso garante que o <code>text_buffer</code> e os índices do disco estejam sempre perfeitamente alinhados.</p>
+
+<p><strong>Conclusão</strong><br>
+Eu não estava criando apenas um explorador de arquivos: eu estava criando o próprio motor de memória para que ele pudesse existir. Na hora de fazer tudo do zero, os ponteiros não perdoam. Porém, quando apertamos ENTER e vemos o nome do arquivo ser modificado diretamente na matriz da memória física, sem utilizar código de terceiros, é aí que percebemos o verdadeiro poder do baixo nível.</p>
+            </div>
+        </article>
 
 
     
