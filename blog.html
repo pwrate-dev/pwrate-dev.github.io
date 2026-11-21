@@ -5,13 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SaturvOS // Blog</title>
 
-    <link rel="icon" href="logo.jpg" type="image/png">
+    <link rel="icon" href="logo.jpg" type="image/jpeg">
 
     <style>
         :root {
             --amarelo: #FFEA00;
             --preto: #0c0c0c;
             --branco: #e0e0e0;
+        }
+
+        * {
+            box-sizing: border-box;
         }
 
         body {
@@ -55,8 +59,13 @@
             color: var(--amarelo);
         }
 
+        .blog-feed {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
         .entry {
-            margin-bottom: 40px;
             border-left: 2px solid var(--amarelo);
             padding-left: 15px;
         }
@@ -82,11 +91,35 @@
             white-space: pre-wrap;
         }
 
-        footer {
+        .entry-content.rich-text {
+            white-space: normal;
+        }
+
+        .entry-content.rich-text p {
+            margin: 0 0 14px 0;
+        }
+
+        .entry-content.rich-text p:last-child {
+            margin-bottom: 0;
+        }
+
+        .entry-media {
+            margin: 15px 0;
+        }
+
+        .entry-media img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #333;
+            display: block;
+        }
+
+        .site-footer {
             color: #555;
             font-size: 0.8rem;
             margin-top: 50px;
             padding-top: 20px;
+            border-top: 1px dashed #222;
             text-align: center;
         }
     </style>
@@ -99,149 +132,113 @@
         <h1>Daily Blog</h1>
     </header>
 
-    <main>
+    <main class="blog-feed">
         <article class="entry">
             <div class="entry-date">2026-11-03 14:43</div>
-            <h2 class="entry-title">Início do Blog </h2>
-            <div class="entry-content">Falarei sobre os vídeos e o Saturv, não espere que eu seja regrado quanto a isso. </div>
+            <h2 class="entry-title">Início do Blog</h2>
+            <div class="entry-content">Falarei sobre os vídeos e o Saturv, não espere que eu seja regrado quanto a isso.</div>
         </article>
-    </main>
 
- <main>
         <article class="entry">
             <div class="entry-date">2026-11-03 22:14</div>
             <h2 class="entry-title">Sistema de Pastas</h2>
-            <div class="entry-content">Estou cansado de tanto mexer com isso, mas é necessário, Infelizmente. </div>
+            <div class="entry-content">Estou cansado de tanto mexer com isso, mas é necessário, Infelizmente.</div>
         </article>
-    </main>
 
-<main>
-    <article class="entry">
-        <div class="entry-date">2026-11-04 16:34</div>
-        <h2 class="entry-title">Preso nas Subpastas</h2>
-        <div class="entry-content">Estou desde ontem trabalhando nisso, e ainda sim, não funciona. </div>
-    </article>
-</main>
+        <article class="entry">
+            <div class="entry-date">2026-11-04 16:34</div>
+            <h2 class="entry-title">Preso nas Subpastas</h2>
+            <div class="entry-content">Estou desde ontem trabalhando nisso, e ainda sim, não funciona.</div>
+        </article>
 
-<main>
-    <article class="entry">
-        <div class="entry-date">2026-11-05 10:49</div>
-        <h2 class="entry-title">Firme até a Morte</h2>
-        <div class="entry-content">Posso enlouquecer,  não há nada a perder diante ao mundo, irei terminá-lo, e se eu não terminá-lo espero deixar uma versão boa o suficiente para o mundo ver meu castelo.</div>
-    </article>
-</main>
+        <article class="entry">
+            <div class="entry-date">2026-11-05 10:49</div>
+            <h2 class="entry-title">Firme até a Morte</h2>
+            <div class="entry-content">Posso enlouquecer,  não há nada a perder diante ao mundo, irei terminá-lo, e se eu não terminá-lo espero deixar uma versão boa o suficiente para o mundo ver meu castelo.</div>
+        </article>
 
-<main>
-    <article class="entry">
-        <div class="entry-date">2026-11-05 21:56</div>
-        <h2 class="entry-title">Odeio Pastas</h2>
-        <div class="entry-content">Como eu odeio o sistema de pastas! 3 dias apenas trabalhando nisso e amanhã tem mais >:0</div>
-  
-  </article>
-</main>
+        <article class="entry">
+            <div class="entry-date">2026-11-05 21:56</div>
+            <h2 class="entry-title">Odeio Pastas</h2>
+            <div class="entry-content">Como eu odeio o sistema de pastas! 3 dias apenas trabalhando nisso e amanhã tem mais &gt;:0</div>
+        </article>
 
         <article class="entry">
             <div class="entry-date">2026-11-07 08:54</div>
             <h2 class="entry-title">O Pesadelo da Memória</h2>
-            <div class="entry-content">
-<p>Por que me prensei por dias nesse problema?</p>
+            <div class="entry-content rich-text">
+                <p>Por que me prensei por dias nesse problema?</p>
 
-<p>Em sistemas como o Windows ou Linux, ao criarmos um programa e precisarmos de mais espaço para alocar uma nova variável ou um array (como uma lista de arquivos), simplesmente chamamos a função <code>realloc()</code> presente na biblioteca padrão do C. O sistema operacional encontra um pedaço de <strong>RAM</strong> vago, coloca nossos dados nele e retorna o ponteiro. Tudo pronto!</p>
+                <p>Em sistemas como o Windows ou Linux, ao criarmos um programa e precisarmos de mais espaço para alocar uma nova variável ou um array (como uma lista de arquivos), simplesmente chamamos a função <code>realloc()</code> presente na biblioteca padrão do C. O sistema operacional encontra um pedaço de <strong>RAM</strong> vago, coloca nossos dados nele e retorna o ponteiro. Tudo pronto!</p>
 
-<p><strong>O que acontece quando VOCÊ é o sistema operacional?</strong></p>
+                <p><strong>O que acontece quando VOCÊ é o sistema operacional?</strong></p>
 
-<p>Aí as coisas ficam complicadas. No desenvolvimento do <strong>SaturvOS</strong> (<em>bare metal</em>), eu não possuo nenhuma biblioteca padrão — portanto, não tenho <code>malloc()</code>, <code>free()</code> ou <code>realloc()</code>. Eu falo diretamente com o hardware, mexo na RAM bit a bit.</p>
+                <p>Aí as coisas ficam complicadas. No desenvolvimento do <strong>SaturvOS</strong> (<em>bare metal</em>), eu não possuo nenhuma biblioteca padrão — portanto, não tenho <code>malloc()</code>, <code>free()</code> ou <code>realloc()</code>. Eu falo diretamente com o hardware, mexo na RAM bit a bit.</p>
 
-<p>Nos últimos 5 dias, o que me prendeu não foi o design da interface gráfica, mas o gerenciamento dinâmico de memória no Disco Virtual. Esse problema se resume a 3 pesadelos:</p>
+                <p>Nos últimos 5 dias, o que me prendeu não foi o design da interface gráfica, mas o gerenciamento dinâmico de memória no Disco Virtual. Esse problema se resume a 3 pesadelos:</p>
 
-<p><strong>1. A Dança dos Ponteiros</strong><br>
-Sempre que um novo arquivo é criado, renomeado ou movido no array <code>disco_virtual</code>, blocos inteiros de memória precisam ser deslocados. Se um único byte for calculado errado, a string que armazena o nome do arquivo não será encontrada. O kernel lerá lixo na memória, causando um crash no sistema todo.</p>
+                <p><strong>1. A Dança dos Ponteiros</strong><br>
+                Sempre que um novo arquivo é criado, renomeado ou movido no array <code>disco_virtual</code>, blocos inteiros de memória precisam ser deslocados. Se um único byte for calculado errado, a string que armazena o nome do arquivo não será encontrada. O kernel lerá lixo na memória, causando um crash no sistema todo.</p>
 
-<p><strong>2. Sincronia com a Interface Gráfica</strong><br>
-A função <code>draw_main_window()</code> roda a dezenas de frames por segundo. Se ela tentar ler o array de arquivos no exato milissegundo em que a memória está sendo movida para incluir um novo arquivo, a tela irá congelar. Isso explica por que, pela manhã, a tela de renomear arquivos vinha bugando ou mostrando nomes incorretos.</p>
+                <p><strong>2. Sincronia com a Interface Gráfica</strong><br>
+                A função <code>draw_main_window()</code> roda a dezenas de frames por segundo. Se ela tentar ler o array de arquivos no exato milissegundo em que a memória está sendo movida para incluir um novo arquivo, a tela irá congelar. Isso explica por que, pela manhã, a tela de renomear arquivos vinha bugando ou mostrando nomes incorretos.</p>
 
-<p><strong>3. Fragmentação do Heap</strong><br>
-Como ainda não possuo um gerenciador de memória avançado, precisei criar uma lógica para que não houvesse "buracos" na RAM após a exclusão ou renomeação de arquivos. Isso garante que o <code>text_buffer</code> e os índices do disco estejam sempre perfeitamente alinhados.</p>
+                <p><strong>3. Fragmentação do Heap</strong><br>
+                Como ainda não possuo um gerenciador de memória avançado, precisei criar uma lógica para que não houvesse "buracos" na RAM após a exclusão ou renomeação de arquivos. Isso garante que o <code>text_buffer</code> e os índices do disco estejam sempre perfeitamente alinhados.</p>
 
-<p><strong>Conclusão</strong><br>
-Eu não estava criando apenas um explorador de arquivos: eu estava criando o próprio motor de memória para que ele pudesse existir. Na hora de fazer tudo do zero, os ponteiros não perdoam. Porém, quando apertamos ENTER e vemos o nome do arquivo ser modificado diretamente na matriz da memória física, sem utilizar código de terceiros, é aí que percebemos o verdadeiro poder do baixo nível.</p>
+                <p><strong>Conclusão</strong><br>
+                Eu não estava criando apenas um explorador de arquivos: eu estava criando o próprio motor de memória para que ele pudesse existir. Na hora de fazer tudo do zero, os ponteiros não perdoam. Porém, quando apertamos ENTER e vemos o nome do arquivo ser modificado diretamente na matriz da memória física, sem utilizar código de terceiros, é aí que percebemos o verdadeiro poder do baixo nível.</p>
             </div>
         </article>
 
-<article class="entry">
-    <div class="entry-date">2026-11-09 13:25 </div>
-    <h2 class="entry-title">chuva maldita</h2>
-    
-    <div style="margin: 15px 0;">
-        <img src="chuva.png" alt="Chuva" style="max-width: 100%; height: auto; border: 1px solid #333; display: block;">
-    </div>
+        <article class="entry">
+            <div class="entry-date">2026-11-09 13:25</div>
+            <h2 class="entry-title">chuva maldita</h2>
 
-    <div class="entry-content">
-2 dias de uma chuva sem fim, eu não aguento mais. Quero terminar logo o sistema de pastas pra colocar coisas interessantes para vocês no SaturvOS.
-    </div>
-</article>
+            <div class="entry-media">
+                <img src="chuva.png" alt="Chuva">
+            </div>
 
-
-<main>
-    <article class="entry">
-        <div class="entry-date">2026-11-13 11:29</div>
-        <h2 class="entry-title">Sistema de Pastas Finalizado</h2>
-        <div class="entry-content">Eu terminei o sistema de pastas, ainda falta algumas atualizações mas nada muito grande eu acho. </div>
-
-  </article>
-</main>
-
-
-<main>
-    <article class="entry">
-        <div class="entry-date">2026-11-16 20:42</div>
-        <h2 class="entry-title">Relato sobre o Amor </h2>
-        <div class="entry-content">Odeio admitir que estou mesmo gostando de alguém, mas cheguei ao ponto de roubar uma caneta dessa pessoa só para ter algo que me dê a sensação de tê-la por perto. Isso seria um amor platônico ou apenas algo mais simples? Eu odeio tanto a forma como ela me olha, como se eu fosse alguém especial. Eu literalmente ando mancando, sou um fumante podre com uma dieta de merda e, sei lá, talvez ela me ame mais do que eu me amo. Talvez isso seja apenas algo criado pela minha <strong>Mente Imaginária.</strong>
-</div>
-
-  </article>
-</main>
-    
-<main>
-    <article class="entry">
-        <div class="entry-date">2026-11-16 22:07</div>
-        <h2 class="entry-title">Tente Fazer Algo do Zero</h2>
-        <div class="entry-content">Seja um círculo perfeito ou um compilador, você terá trabalho para fazer. Ficará meses estudando formas de fazer isso ser mais fácil, tentará ser melhor que alguém que já tenha feito isso antes e perceberá, o quanto antes, que o trabalho é algo longo, sem início ou fim. Tudo começa a ser um loop de aperfeiçoamento — tudo, literalmente tudo. Quanto mais você aprende, menos sua sanidade está presente. Sua vida, seu trabalho, tudo perde o sentido; você se torna aquilo que todos temiam: um louco sem sentimentos ou causas. A loucura vem de dentro de si próprio; está escondida diante de pessoas, gestos e tudo que pareça melhor que você. Não espere sabedoria sem consequências. No final, tudo tem seu contra peso. 
-</div>
-
-  </article>
-</main>
-
-<main>
-    <article class="entry">
-        <div class="entry-date">2026-11-19 21:03</div>
-        <h2 class="entry-title">Pior Fase</h2>
-        <div class="entry-content">Estou no submundo do meu cérebro, na pior fase da minha vida; uma depressão forte que eu nunca senti em toda a minha vida, descobrir o que é o amor e como ele é pior do que a solidão — nunca vi a solidão me dar vontade de morrer no ponto em que o amor deu.</div>
-
-  </article>
-</main>
-
- 
- </div>
+            <div class="entry-content">2 dias de uma chuva sem fim, eu não aguento mais. Quero terminar logo o sistema de pastas pra colocar coisas interessantes para vocês no SaturvOS.</div>
         </article>
 
-<article class="entry">
-    <div class="entry-date">2026-11-20 23:04 </div>
-    <h2 class="entry-title">veracidade</h2>
+        <article class="entry">
+            <div class="entry-date">2026-11-13 11:29</div>
+            <h2 class="entry-title">Sistema de Pastas Finalizado</h2>
+            <div class="entry-content">Eu terminei o sistema de pastas, ainda falta algumas atualizações mas nada muito grande eu acho.</div>
+        </article>
 
-    <div style="margin: 15px 0;">
-        <img src="ab.jpg" alt="ab" style="max-width: 100%; height: auto; border: 1px solid #333; display: block;">
-    </div>
+        <article class="entry">
+            <div class="entry-date">2026-11-16 20:42</div>
+            <h2 class="entry-title">Relato sobre o Amor</h2>
+            <div class="entry-content">Odeio admitir que estou mesmo gostando de alguém, mas cheguei ao ponto de roubar uma caneta dessa pessoa só para ter algo que me dê a sensação de tê-la por perto. Isso seria um amor platônico ou apenas algo mais simples? Eu odeio tanto a forma como ela me olha, como se eu fosse alguém especial. Eu literalmente ando mancando, sou um fumante podre com uma dieta de merda e, sei lá, talvez ela me ame mais do que eu me amo. Talvez isso seja apenas algo criado pela minha <strong>Mente Imaginária.</strong></div>
+        </article>
 
-    <div class="entry-content">
-Caso eu desapareça, eu tenho todas provas contra<strong>ABIN</strong> E eles sabem disso 
-    </div>
-</article>
- 
-        
+        <article class="entry">
+            <div class="entry-date">2026-11-16 22:07</div>
+            <h2 class="entry-title">Tente Fazer Algo do Zero</h2>
+            <div class="entry-content">Seja um círculo perfeito ou um compilador, você terá trabalho para fazer. Ficará meses estudando formas de fazer isso ser mais fácil, tentará ser melhor que alguém que já tenha feito isso antes e perceberá, o quanto antes, que o trabalho é algo longo, sem início ou fim. Tudo começa a ser um loop de aperfeiçoamento — tudo, literalmente tudo. Quanto mais você aprende, menos sua sanidade está presente. Sua vida, seu trabalho, tudo perde o sentido; você se torna aquilo que todos temiam: um louco sem sentimentos ou causas. A loucura vem de dentro de si próprio; está escondida diante de pessoas, gestos e tudo que pareça melhor que você. Não espere sabedoria sem consequências. No final, tudo tem seu contra peso.</div>
+        </article>
 
-<div>
-    <footer>
+        <article class="entry">
+            <div class="entry-date">2026-11-19 21:03</div>
+            <h2 class="entry-title">Pior Fase</h2>
+            <div class="entry-content">Estou no submundo do meu cérebro, na pior fase da minha vida; uma depressão forte que eu nunca senti em toda a minha vida, descobrir o que é o amor e como ele é pior do que a solidão — nunca vi a solidão me dar vontade de morrer no ponto que o amor deu.</div>
+        </article>
+
+        <article class="entry">
+            <div class="entry-date">2026-11-20 23:04</div>
+            <h2 class="entry-title">veracidade</h2>
+
+            <div class="entry-media">
+                <img src="ab.jpg" alt="ab">
+            </div>
+
+            <div class="entry-content">Caso eu desapareça, eu tenho todas provas contra<strong>ABIN</strong> E eles sabem disso</div>
+        </article>
+    </main>
+
+    <footer class="site-footer">
         SATURVOS // 2026 // PWRAT
     </footer>
 </div>
