@@ -162,10 +162,6 @@ const BUZZER_ATIVO = false;      // Só funciona com o rádio LIGADO e BUZZER_AT
 const INTERVALO_BUZZER_MS = 2450;
 const GANHO_BUZZER = 0.08;
 
-const USAR_VOZ = true;           // Sintetizador de voz
-const VELOCIDADE_VOZ = 0.92;
-const TOM_VOZ = 0.85;
-
 const USAR_MORSE = true;         // Código Morse gerado automaticamente da mensagem
 const VELOCIDADE_PONTO_MS = 75;
 const TOM_CW_HZ = 740;
@@ -296,45 +292,6 @@ function triggerBuzzerPulse() {
     osc2.stop(now + duration + 0.02);
 }
 
-function speakMessage(text) {
-    return new Promise((resolve) => {
-        if (!radioOn || !USAR_VOZ || !('speechSynthesis' in window)) {
-            return resolve();
-        }
-
-        try {
-            window.speechSynthesis.cancel();
-            const utter = new SpeechSynthesisUtterance(text);
-            utter.lang = 'pt-BR';
-            utter.rate = VELOCIDADE_VOZ;
-            utter.pitch = TOM_VOZ;
-
-            const voices = window.speechSynthesis.getVoices();
-            const ptVoice = voices.find((v) => v.lang && v.lang.toLowerCase().startsWith('pt'));
-            if (ptVoice) utter.voice = ptVoice;
-
-            let finished = false;
-            const done = () => {
-                if (finished) return;
-                finished = true;
-                resolve();
-            };
-
-            utter.onend = done;
-            utter.onerror = done;
-
-            const fallbackMs = Math.max(1500, text.length * 140);
-            const guard = setTimeout(done, fallbackMs);
-            utter.addEventListener('end', () => clearTimeout(guard));
-            utter.addEventListener('error', () => clearTimeout(guard));
-
-            window.speechSynthesis.speak(utter);
-        } catch (e) {
-            resolve();
-        }
-    });
-}
-
 function playCwBeep(durationMs, freq) {
     return new Promise((resolve) => {
         if (!radioOn || !audioCtx) return resolve();
@@ -396,8 +353,6 @@ async function runMessageCycle() {
     if (!radioOn || !msg || isSendingMessage) return;
 
     isSendingMessage = true;
-    await speakMessage(msg);
-    await wait(400);
     await playMorseString(morse);
     isSendingMessage = false;
 }
@@ -428,11 +383,6 @@ function stopRadioServices() {
         repeatTimer = null;
     }
     isSendingMessage = false;
-    if ('speechSynthesis' in window) {
-        try {
-            window.speechSynthesis.cancel();
-        } catch (e) {}
-    }
 }
 
 btnPower.addEventListener('click', async () => {
