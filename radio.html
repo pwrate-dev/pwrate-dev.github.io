@@ -132,15 +132,15 @@
 <div class="main-container">
     <header>
         <a href="index.html" class="nav-back">&lt; Voltar para Home</a>
-        <h1>Estação Fantasma</h1>
-        <div class="freq-tag">FREQ: 4625.0 kHz // MODO: USB</div>
+        <h1>Estação SaturvOs </h1>
+        
     </header>
 
     <main>
         <section class="panel">
             <div class="status-box">
                 <span><span id="radio-led" class="led"></span><span id="radio-status">DESLIGADO</span></span>
-                <span>CHIADO</span>
+                
             </div>
 
             <button id="btn-power">Ligar Rádio</button>
@@ -205,7 +205,7 @@ btnPower.addEventListener('click', async () => {
         radioOn = true;
         radioLed.classList.add('on');
         btnPower.textContent = 'Desligar Rádio';
-        radioStatus.textContent = 'LIGADO // CHIADO';
+        radioStatus.textContent = 'LIGADO';
     } else {
         radioOn = false;
         radioLed.classList.remove('on');
