@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SaturvOS // Rádio </title>
+    <title>SaturvOS // Rádio</title>
 
     <link rel="icon" href="logo.jpg" type="image/jpeg">
 
@@ -13,7 +13,6 @@
             --preto: #0c0c0c;
             --branco: #e0e0e0;
             --cinza-escuro: #151515;
-            --vermelho: #ff3b3b;
         }
 
         * {
@@ -75,14 +74,6 @@
             margin-bottom: 32px;
         }
 
-        .panel-title {
-            color: var(--amarelo);
-            font-weight: bold;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            margin: 0 0 12px 0;
-        }
-
         .status-box {
             background-color: var(--cinza-escuro);
             border: 1px solid #2a2a2a;
@@ -108,22 +99,11 @@
             box-shadow: 0 0 8px var(--amarelo);
         }
 
-        .led.tx {
-            background-color: var(--vermelho);
-            box-shadow: 0 0 8px var(--vermelho);
-        }
-
-        .controls-row {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-
         button {
             background-color: transparent;
             color: var(--amarelo);
             border: 1px solid var(--amarelo);
-            padding: 10px 16px;
+            padding: 10px 18px;
             font-family: inherit;
             font-size: 0.85rem;
             text-transform: uppercase;
@@ -135,66 +115,6 @@
             background-color: var(--amarelo);
             color: var(--preto);
             font-weight: bold;
-        }
-
-        button:disabled {
-            opacity: 0.4;
-            cursor: not-allowed;
-        }
-
-        textarea, input[type="text"] {
-            width: 100%;
-            background-color: var(--cinza-escuro);
-            color: var(--branco);
-            border: 1px solid #333;
-            padding: 10px 12px;
-            font-family: inherit;
-            font-size: 0.95rem;
-            margin-bottom: 12px;
-            outline: none;
-        }
-
-        textarea:focus, input[type="text"]:focus {
-            border-color: var(--amarelo);
-        }
-
-        .sliders {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin-top: 15px;
-            font-size: 0.8rem;
-            color: #aaa;
-        }
-
-        .sliders label {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-        }
-
-        input[type="range"] {
-            accent-color: var(--amarelo);
-            cursor: pointer;
-        }
-
-        .morse-monitor {
-            background-color: var(--cinza-escuro);
-            border: 1px dashed #333;
-            padding: 12px;
-            min-height: 48px;
-            font-size: 1rem;
-            letter-spacing: 2px;
-            color: var(--amarelo);
-            word-break: break-all;
-            margin-top: 12px;
-        }
-
-        .hint {
-            color: #777;
-            font-size: 0.8rem;
-            line-height: 1.5;
-            margin-top: 10px;
         }
 
         .site-footer {
@@ -213,62 +133,17 @@
     <header>
         <a href="index.html" class="nav-back">&lt; Voltar para Home</a>
         <h1>Estação Fantasma</h1>
-        <div class="freq-tag">FREQ: 4625.0 kHz // MODO: USB // CANAL MARCADOR</div>
+        <div class="freq-tag">FREQ: 4625.0 kHz // MODO: USB</div>
     </header>
 
     <main>
         <section class="panel">
-            <h2 class="panel-title">01 // Marcador de Canal (TSS / Buzzer)</h2>
-
             <div class="status-box">
-                <span><span id="buzzer-led" class="led"></span><span id="buzzer-status">PORTADORA DESLIGADA</span></span>
-                <span id="pulse-counter">PULSOS: 0</span>
+                <span><span id="radio-led" class="led"></span><span id="radio-status">DESLIGADO</span></span>
+                <span>CHIADO</span>
             </div>
 
-            <div class="controls-row">
-                <button id="btn-power">Ligar Rádio</button>
-            </div>
-
-            <div class="sliders">
-                <label>
-                    GANHO DO ZUMBIDO: <span id="val-buzz">18%</span>
-                    <input id="ctrl-buzz" type="range" min="0" max="40" value="18">
-                </label>
-                <label>
-                    ESTÁTICA HF: <span id="val-noise">12%</span>
-                    <input id="ctrl-noise" type="range" min="0" max="40" value="12">
-                </label>
-            </div>
-        </section>
-
-        <section class="panel">
-            <h2 class="panel-title">02 // Transmissor CW (Código Morse)</h2>
-
-            <textarea id="morse-msg" rows="3" placeholder="Digite a mensagem para modular em Morse...">SATURVOS ATIVO</textarea>
-
-            <div class="status-box">
-                <span><span id="tx-led" class="led"></span><span id="tx-status">AGUARDANDO TX</span></span>
-                <span id="wpm-label">16 WPM</span>
-            </div>
-
-            <div class="controls-row">
-                <button id="btn-tx">Transmitir Mensagem</button>
-                <button id="btn-stop-tx" disabled>Abortar TX</button>
-            </div>
-
-            <div class="sliders">
-                <label>
-                    VELOCIDADE (PONTO): <span id="val-speed">75 ms</span>
-                    <input id="ctrl-speed" type="range" min="45" max="150" value="75">
-                </label>
-                <label>
-                    TOM CW: <span id="val-pitch">740 Hz</span>
-                    <input id="ctrl-pitch" type="range" min="450" max="1100" value="740">
-                </label>
-            </div>
-
-            <div id="morse-monitor" class="morse-monitor">---</div>
-            <p class="hint">Durante a transmissão CW, o marcador "TSS" pausa automaticamente e retorna ao fim da mensagem, igual às estações de números.</p>
+            <button id="btn-power">Ligar Rádio</button>
         </section>
     </main>
 
@@ -278,58 +153,26 @@
 </div>
 
 <script>
-const MORSE_TABLE = {
-    'A': '.-',    'B': '-...',  'C': '-.-.',  'D': '-..',   'E': '.',
-    'F': '..-.',  'G': '--.',   'H': '....',  'I': '..',    'J': '.---',
-    'K': '-.-',   'L': '.-..',  'M': '--',    'N': '-.',    'O': '---',
-    'P': '.--.',  'Q': '--.-',  'R': '.-.',   'S': '...',   'T': '-',
-    'U': '..-',   'V': '...-',  'W': '.--',   'X': '-..-',  'Y': '-.--',
-    'Z': '--..',
-    '0': '-----', '1': '.----', '2': '..---', '3': '...--', '4': '....-',
-    '5': '.....', '6': '-....', '7': '--...', '8': '---..', '9': '----.',
-    '.': '.-.-.-', ',': '--..--', '?': '..--..', '/': '-..-.', '-': '-....-',
-    ':': '---...', '!': '-.-.--'
-};
+// =========================================================================
+// CONFIGURAÇÃO DO CHIADO
+// =========================================================================
+const GANHO_CHIADO = 0.04;
+const FREQUENCIA_FILTRO_HZ = 1450;
+// =========================================================================
 
 let audioCtx = null;
-let noiseGain = null;
-let buzzMasterGain = null;
 let radioOn = false;
-let buzzerTimer = null;
-let pulseCount = 0;
-let isTransmitting = false;
-let abortTx = false;
 
 const btnPower = document.getElementById('btn-power');
-const btnTx = document.getElementById('btn-tx');
-const btnStopTx = document.getElementById('btn-stop-tx');
-const buzzerLed = document.getElementById('buzzer-led');
-const buzzerStatus = document.getElementById('buzzer-status');
-const pulseCounter = document.getElementById('pulse-counter');
-const txLed = document.getElementById('tx-led');
-const txStatus = document.getElementById('tx-status');
-const morseMonitor = document.getElementById('morse-monitor');
-const morseMsgInput = document.getElementById('morse-msg');
-
-const ctrlBuzz = document.getElementById('ctrl-buzz');
-const ctrlNoise = document.getElementById('ctrl-noise');
-const ctrlSpeed = document.getElementById('ctrl-speed');
-const ctrlPitch = document.getElementById('ctrl-pitch');
-
-// Carrega mensagem opcional via URL (?tx=BASE64)
-const params = new URLSearchParams(window.location.search);
-if (params.get('tx')) {
-    try {
-        morseMsgInput.value = atob(params.get('tx'));
-    } catch (e) {}
-}
+const radioLed = document.getElementById('radio-led');
+const radioStatus = document.getElementById('radio-status');
 
 function setupAudio() {
     if (audioCtx) return;
     const AudioContextClass = window.AudioContext || window.webkitAudioContext;
     audioCtx = new AudioContextClass();
 
-    // Estática contínua de ondas curtas (HF)
+    // Chiado / estática contínua de rádio
     const bufferSize = audioCtx.sampleRate * 3;
     const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
     const output = buffer.getChannelData(0);
@@ -343,77 +186,16 @@ function setupAudio() {
 
     const bandpass = audioCtx.createBiquadFilter();
     bandpass.type = 'bandpass';
-    bandpass.frequency.value = 1450;
+    bandpass.frequency.value = FREQUENCIA_FILTRO_HZ;
     bandpass.Q.value = 0.7;
 
-    noiseGain = audioCtx.createGain();
-    noiseGain.gain.value = (ctrlNoise.value / 100) * 0.25;
+    const noiseGain = audioCtx.createGain();
+    noiseGain.gain.value = GANHO_CHIADO;
 
     whiteNoise.connect(bandpass);
     bandpass.connect(noiseGain);
     noiseGain.connect(audioCtx.destination);
     whiteNoise.start();
-
-    buzzMasterGain = audioCtx.createGain();
-    buzzMasterGain.gain.value = (ctrlBuzz.value / 100) * 0.45;
-    buzzMasterGain.connect(audioCtx.destination);
-}
-
-// Gera um pulso grave e áspero tipo UVB-76 ("TSS")
-function triggerBuzzerPulse() {
-    if (!radioOn || isTransmitting || !audioCtx) return;
-
-    const now = audioCtx.currentTime;
-    const duration = 1.15;
-
-    const osc1 = audioCtx.createOscillator();
-    const osc2 = audioCtx.createOscillator();
-    const filter = audioCtx.createBiquadFilter();
-    const env = audioCtx.createGain();
-
-    osc1.type = 'sawtooth';
-    osc1.frequency.setValueAtTime(108, now);
-
-    osc2.type = 'square';
-    osc2.frequency.setValueAtTime(216.5, now);
-
-    filter.type = 'bandpass';
-    filter.frequency.setValueAtTime(620, now);
-    filter.Q.value = 2.8;
-
-    env.gain.setValueAtTime(0.0001, now);
-    env.gain.linearRampToValueAtTime(1.0, now + 0.03);
-    env.gain.setValueAtTime(0.95, now + duration - 0.04);
-    env.gain.exponentialRampToValueAtTime(0.0001, now + duration);
-
-    osc1.connect(filter);
-    osc2.connect(filter);
-    filter.connect(env);
-    env.connect(buzzMasterGain);
-
-    osc1.start(now);
-    osc2.start(now);
-    osc1.stop(now + duration + 0.02);
-    osc2.stop(now + duration + 0.02);
-
-    pulseCount++;
-    pulseCounter.textContent = `PULSOS: ${pulseCount}`;
-    buzzerLed.classList.add('on');
-    setTimeout(() => buzzerLed.classList.remove('on'), duration * 1000);
-}
-
-function startBuzzerLoop() {
-    stopBuzzerLoop();
-    triggerBuzzerPulse();
-    buzzerTimer = setInterval(triggerBuzzerPulse, 2450);
-}
-
-function stopBuzzerLoop() {
-    if (buzzerTimer) {
-        clearInterval(buzzerTimer);
-        buzzerTimer = null;
-    }
-    buzzerLed.classList.remove('on');
 }
 
 btnPower.addEventListener('click', async () => {
@@ -421,132 +203,16 @@ btnPower.addEventListener('click', async () => {
     if (!radioOn) {
         if (audioCtx.state === 'suspended') await audioCtx.resume();
         radioOn = true;
+        radioLed.classList.add('on');
         btnPower.textContent = 'Desligar Rádio';
-        buzzerStatus.textContent = 'MARCADOR ATIVO (4625 kHz)';
-        startBuzzerLoop();
+        radioStatus.textContent = 'LIGADO // CHIADO';
     } else {
         radioOn = false;
-        stopBuzzerLoop();
+        radioLed.classList.remove('on');
         await audioCtx.suspend();
         btnPower.textContent = 'Ligar Rádio';
-        buzzerStatus.textContent = 'PORTADORA DESLIGADA';
+        radioStatus.textContent = 'DESLIGADO';
     }
-});
-
-function normalizeText(str) {
-    return str
-        .normalize('NFD')
-        .replace(/[\u0300-\u036f]/g, '')
-        .toUpperCase();
-}
-
-function playCwBeep(durationMs, freq) {
-    return new Promise((resolve) => {
-        const now = audioCtx.currentTime;
-        const durSec = durationMs / 1000;
-
-        const osc = audioCtx.createOscillator();
-        const gain = audioCtx.createGain();
-
-        osc.type = 'sine';
-        osc.frequency.setValueAtTime(freq, now);
-
-        gain.gain.setValueAtTime(0.0001, now);
-        gain.gain.exponentialRampToValueAtTime(0.22, now + 0.008);
-        gain.gain.setValueAtTime(0.22, now + Math.max(0.01, durSec - 0.008));
-        gain.gain.exponentialRampToValueAtTime(0.0001, now + durSec);
-
-        osc.connect(gain);
-        gain.connect(audioCtx.destination);
-
-        txLed.classList.add('tx');
-        osc.start(now);
-        osc.stop(now + durSec + 0.01);
-        osc.onended = () => {
-            txLed.classList.remove('tx');
-            resolve();
-        };
-    });
-}
-
-const wait = (ms) => new Promise((r) => setTimeout(r, ms));
-
-btnTx.addEventListener('click', async () => {
-    const raw = morseMsgInput.value.trim();
-    if (!raw || isTransmitting) return;
-
-    setupAudio();
-    if (audioCtx.state === 'suspended') await audioCtx.resume();
-
-    isTransmitting = true;
-    abortTx = false;
-    btnTx.disabled = true;
-    btnStopTx.disabled = false;
-    txStatus.textContent = 'TRANSMITINDO CW...';
-    morseMonitor.textContent = '';
-
-    const dot = Number(ctrlSpeed.value);
-    const freq = Number(ctrlPitch.value);
-    const text = normalizeText(raw);
-
-    for (let i = 0; i < text.length; i++) {
-        if (abortTx) break;
-        const ch = text[i];
-
-        if (ch === ' ' || ch === '\n') {
-            morseMonitor.textContent += ' / ';
-            await wait(dot * 5);
-            continue;
-        }
-
-        const code = MORSE_TABLE[ch];
-        if (!code) continue;
-
-        for (let j = 0; j < code.length; j++) {
-            if (abortTx) break;
-            const symbol = code[j];
-            morseMonitor.textContent += symbol;
-            await playCwBeep(symbol === '.' ? dot : dot * 3, freq);
-            if (j < code.length - 1) await wait(dot);
-        }
-
-        morseMonitor.textContent += ' ';
-        await wait(dot * 3);
-    }
-
-    isTransmitting = false;
-    btnTx.disabled = false;
-    btnStopTx.disabled = true;
-    txStatus.textContent = abortTx ? 'TX ABORTADA' : 'TRANSMISSÃO CONCLUÍDA';
-
-    // Se o rádio desligado foi acordado só para transmitir, volta a suspender
-    if (!radioOn && audioCtx.state === 'running') {
-        await audioCtx.suspend();
-    }
-});
-
-btnStopTx.addEventListener('click', () => {
-    abortTx = true;
-});
-
-ctrlBuzz.addEventListener('input', () => {
-    document.getElementById('val-buzz').textContent = `${ctrlBuzz.value}%`;
-    if (buzzMasterGain) buzzMasterGain.gain.value = (ctrlBuzz.value / 100) * 0.45;
-});
-
-ctrlNoise.addEventListener('input', () => {
-    document.getElementById('val-noise').textContent = `${ctrlNoise.value}%`;
-    if (noiseGain) noiseGain.gain.value = (ctrlNoise.value / 100) * 0.25;
-});
-
-ctrlSpeed.addEventListener('input', () => {
-    const ms = Number(ctrlSpeed.value);
-    document.getElementById('val-speed').textContent = `${ms} ms`;
-    document.getElementById('wpm-label').textContent = `${Math.round(1200 / ms)} WPM`;
-});
-
-ctrlPitch.addEventListener('input', () => {
-    document.getElementById('val-pitch').textContent = `${ctrlPitch.value} Hz`;
 });
 </script>
 
