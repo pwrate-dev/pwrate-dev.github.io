@@ -132,15 +132,13 @@
 <div class="main-container">
     <header>
         <a href="index.html" class="nav-back">&lt; Voltar para Home</a>
-        <h1>Estação SaturvOs </h1>
-        
+        <h1>Estação SaturvOs</h1>
     </header>
 
     <main>
         <section class="panel">
             <div class="status-box">
                 <span><span id="radio-led" class="led"></span><span id="radio-status">DESLIGADO</span></span>
-                
             </div>
 
             <button id="btn-power">Ligar Rádio</button>
@@ -154,25 +152,83 @@
 
 <script>
 // =========================================================================
-// CONFIGURAÇÃO DO CHIADO
 // =========================================================================
+const MENSAGEM_TRANSMISSAO = "";
+
+const REPETIR_MENSAGEM = true;   // true = repete a cada INTERVALO_REPETICAO_MS | false = 1x ao ligar
+const INTERVALO_REPETICAO_MS = 20000;
+
+const BUZZER_ATIVO = false;      // Só funciona com o rádio LIGADO e BUZZER_ATIVO = true
+const INTERVALO_BUZZER_MS = 2450;
+const GANHO_BUZZER = 0.08;
+
+const USAR_VOZ = true;           // Sintetizador de voz
+const VELOCIDADE_VOZ = 0.92;
+const TOM_VOZ = 0.85;
+
+const USAR_MORSE = true;         // Código Morse gerado automaticamente da mensagem
+const VELOCIDADE_PONTO_MS = 75;
+const TOM_CW_HZ = 740;
+
 const GANHO_CHIADO = 0.04;
 const FREQUENCIA_FILTRO_HZ = 1450;
 // =========================================================================
 
+const MORSE_TABLE = {
+    'A': '.-',    'B': '-...',  'C': '-.-.',  'D': '-..',   'E': '.',
+    'F': '..-.',  'G': '--.',   'H': '....',  'I': '..',    'J': '.---',
+    'K': '-.-',   'L': '.-..',  'M': '--',    'N': '-.',    'O': '---',
+    'P': '.--.',  'Q': '--.-',  'R': '.-.',   'S': '...',   'T': '-',
+    'U': '..-',   'V': '...-',  'W': '.--',   'X': '-..-',  'Y': '-.--',
+    'Z': '--..',
+    '0': '-----', '1': '.----', '2': '..---', '3': '...--', '4': '....-',
+    '5': '.....', '6': '-....', '7': '--...', '8': '---..', '9': '----.',
+    '.': '.-.-.-', ',': '--..--', '?': '..--..', '/': '-..-.', '-': '-....-',
+    ':': '---...', '!': '-.-.--'
+};
+
 let audioCtx = null;
+let buzzMasterGain = null;
 let radioOn = false;
+let buzzerTimer = null;
+let repeatTimer = null;
+let isSendingMessage = false;
 
 const btnPower = document.getElementById('btn-power');
 const radioLed = document.getElementById('radio-led');
 const radioStatus = document.getElementById('radio-status');
+
+function normalizeText(str) {
+    return str
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .toUpperCase();
+}
+
+// Converte a mensagem escrita no código para uma string de código Morse
+function textoParaMorse(texto) {
+    const limpo = normalizeText(texto).trim();
+    if (!limpo) return '';
+
+    return limpo
+        .split(/\s+/)
+        .map((palavra) =>
+            palavra
+                .split('')
+                .map((ch) => MORSE_TABLE[ch] || '')
+                .filter(Boolean)
+                .join(' ')
+        )
+        .filter(Boolean)
+        .join(' / ');
+}
 
 function setupAudio() {
     if (audioCtx) return;
     const AudioContextClass = window.AudioContext || window.webkitAudioContext;
     audioCtx = new AudioContextClass();
 
-    // Chiado / estática contínua de rádio
+    // Chiado contínuo de rádio
     const bufferSize = audioCtx.sampleRate * 3;
     const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
     const output = buffer.getChannelData(0);
@@ -196,6 +252,187 @@ function setupAudio() {
     bandpass.connect(noiseGain);
     noiseGain.connect(audioCtx.destination);
     whiteNoise.start();
+
+    buzzMasterGain = audioCtx.createGain();
+    buzzMasterGain.gain.value = GANHO_BUZZER;
+    buzzMasterGain.connect(audioCtx.destination);
+}
+
+// Buzzer ("TSS") — só roda quando o rádio está LIGADO e BUZZER_ATIVO é true
+function triggerBuzzerPulse() {
+    if (!radioOn || !BUZZER_ATIVO || isSendingMessage || !audioCtx) return;
+
+    const now = audioCtx.currentTime;
+    const duration = 1.15;
+
+    const osc1 = audioCtx.createOscillator();
+    const osc2 = audioCtx.createOscillator();
+    const filter = audioCtx.createBiquadFilter();
+    const env = audioCtx.createGain();
+
+    osc1.type = 'sawtooth';
+    osc1.frequency.setValueAtTime(108, now);
+
+    osc2.type = 'square';
+    osc2.frequency.setValueAtTime(216.5, now);
+
+    filter.type = 'bandpass';
+    filter.frequency.setValueAtTime(620, now);
+    filter.Q.value = 2.8;
+
+    env.gain.setValueAtTime(0.0001, now);
+    env.gain.linearRampToValueAtTime(1.0, now + 0.03);
+    env.gain.setValueAtTime(0.95, now + duration - 0.04);
+    env.gain.exponentialRampToValueAtTime(0.0001, now + duration);
+
+    osc1.connect(filter);
+    osc2.connect(filter);
+    filter.connect(env);
+    env.connect(buzzMasterGain);
+
+    osc1.start(now);
+    osc2.start(now);
+    osc1.stop(now + duration + 0.02);
+    osc2.stop(now + duration + 0.02);
+}
+
+function speakMessage(text) {
+    return new Promise((resolve) => {
+        if (!radioOn || !USAR_VOZ || !('speechSynthesis' in window)) {
+            return resolve();
+        }
+
+        try {
+            window.speechSynthesis.cancel();
+            const utter = new SpeechSynthesisUtterance(text);
+            utter.lang = 'pt-BR';
+            utter.rate = VELOCIDADE_VOZ;
+            utter.pitch = TOM_VOZ;
+
+            const voices = window.speechSynthesis.getVoices();
+            const ptVoice = voices.find((v) => v.lang && v.lang.toLowerCase().startsWith('pt'));
+            if (ptVoice) utter.voice = ptVoice;
+
+            let finished = false;
+            const done = () => {
+                if (finished) return;
+                finished = true;
+                resolve();
+            };
+
+            utter.onend = done;
+            utter.onerror = done;
+
+            const fallbackMs = Math.max(1500, text.length * 140);
+            const guard = setTimeout(done, fallbackMs);
+            utter.addEventListener('end', () => clearTimeout(guard));
+            utter.addEventListener('error', () => clearTimeout(guard));
+
+            window.speechSynthesis.speak(utter);
+        } catch (e) {
+            resolve();
+        }
+    });
+}
+
+function playCwBeep(durationMs, freq) {
+    return new Promise((resolve) => {
+        if (!radioOn || !audioCtx) return resolve();
+
+        const now = audioCtx.currentTime;
+        const durSec = durationMs / 1000;
+
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, now);
+
+        gain.gain.setValueAtTime(0.0001, now);
+        gain.gain.exponentialRampToValueAtTime(0.22, now + 0.008);
+        gain.gain.setValueAtTime(0.22, now + Math.max(0.01, durSec - 0.008));
+        gain.gain.exponentialRampToValueAtTime(0.0001, now + durSec);
+
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+
+        osc.start(now);
+        osc.stop(now + durSec + 0.01);
+        osc.onended = resolve;
+    });
+}
+
+const wait = (ms) => new Promise((r) => setTimeout(r, ms));
+
+async function playMorseString(morseStr) {
+    if (!radioOn || !USAR_MORSE || !morseStr) return;
+
+    const tokens = morseStr.split(' ');
+    for (let i = 0; i < tokens.length; i++) {
+        if (!radioOn) break;
+        const token = tokens[i];
+
+        if (token === '/') {
+            await wait(VELOCIDADE_PONTO_MS * 4);
+            continue;
+        }
+
+        for (let j = 0; j < token.length; j++) {
+            if (!radioOn) break;
+            const symbol = token[j];
+            if (symbol === '.' || symbol === '-') {
+                await playCwBeep(symbol === '.' ? VELOCIDADE_PONTO_MS : VELOCIDADE_PONTO_MS * 3, TOM_CW_HZ);
+                if (j < token.length - 1) await wait(VELOCIDADE_PONTO_MS);
+            }
+        }
+
+        await wait(VELOCIDADE_PONTO_MS * 3);
+    }
+}
+
+async function runMessageCycle() {
+    const msg = MENSAGEM_TRANSMISSAO.trim();
+    const morse = textoParaMorse(msg);
+    if (!radioOn || !msg || isSendingMessage) return;
+
+    isSendingMessage = true;
+    await speakMessage(msg);
+    await wait(400);
+    await playMorseString(morse);
+    isSendingMessage = false;
+}
+
+function startRadioServices() {
+    stopRadioServices();
+
+    if (BUZZER_ATIVO) {
+        triggerBuzzerPulse();
+        buzzerTimer = setInterval(triggerBuzzerPulse, INTERVALO_BUZZER_MS);
+    }
+
+    if (MENSAGEM_TRANSMISSAO.trim()) {
+        runMessageCycle();
+        if (REPETIR_MENSAGEM) {
+            repeatTimer = setInterval(runMessageCycle, INTERVALO_REPETICAO_MS);
+        }
+    }
+}
+
+function stopRadioServices() {
+    if (buzzerTimer) {
+        clearInterval(buzzerTimer);
+        buzzerTimer = null;
+    }
+    if (repeatTimer) {
+        clearInterval(repeatTimer);
+        repeatTimer = null;
+    }
+    isSendingMessage = false;
+    if ('speechSynthesis' in window) {
+        try {
+            window.speechSynthesis.cancel();
+        } catch (e) {}
+    }
 }
 
 btnPower.addEventListener('click', async () => {
@@ -206,9 +443,11 @@ btnPower.addEventListener('click', async () => {
         radioLed.classList.add('on');
         btnPower.textContent = 'Desligar Rádio';
         radioStatus.textContent = 'LIGADO';
+        startRadioServices();
     } else {
         radioOn = false;
         radioLed.classList.remove('on');
+        stopRadioServices();
         await audioCtx.suspend();
         btnPower.textContent = 'Ligar Rádio';
         radioStatus.textContent = 'DESLIGADO';
